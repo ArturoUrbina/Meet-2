@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151120937-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-151120937-1');
+    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" type="image/x-icon" href="./img/MeetULogo.png" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+  <title>MeetU - <%=user%></title>
+  <link href="./vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+  <link href="./vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+  <link href="./https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+  <link href="./vendor/select2/select2.min.css" rel="stylesheet" media="all">
+  <link href="./vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+  <link href="./css/maiinn.css" rel="stylesheet" media="all">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Custom fonts for this template -->
+  <link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="./vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  
+  <link href="./css/landing-page.minnn.css" rel="stylesheet">
+ 
+  <link href="./vendor/bootstrapp/css/bootstrap.minn.css" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+  <link href="./vendor/fontawesome-freee/css/all.min.css" rel="stylesheet">
+
+  <link href="./css/resumee.minn.css" rel="stylesheet">
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="./js/valProf.js"></script>
+  <style>
+    .input-group {
+      position: relative;
+      margin: 0;
+    }
+    .input-file {
+      display: none;
+    }
+
+    .input-file + label {
+      font-size: 15px;
+      color: #fff;
+      color: white;
+      line-height: 40px;
+      background-color: darkblue;
+      padding: 0 6rem;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 5rem;
+      margin-left: 1rem;
+      -webkit-transition: all 0.4s ease;
+      -o-transition: all 0.4s ease;
+      -moz-transition: all 0.4s ease;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .input-file:focus + label,
+    .input-file + label:hover {
+      background: #1b1b1b;
+    }
+
+    .input-file__info {
+      font-size: 15px;
+      color: #666;
+    }
+
+    @media (max-width: 767px) {
+      .input-file__info {
+        display: block;
+        margin-top: 6px;
+      }
+    }
+</style>
+</head>
+
+<body id="page-top" onkeydown="return validaBody(event)">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="/">    
+          <span class="d-none d-lg-block">
+                <img class="img-fluid" src="./img/MeetULogo.png" alt="">
+              </span>
+        </a>
+    <a class="navbar-brand js-scroll-trigger">
+      <span class="d-block d-lg-none"><%=chat.use_us%></span>
+      <span class="d-none d-lg-block">
+          <%if(chat.ref_am){%>
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="<%=chat.fot_us%>" style="width: 20rem; height: 20rem;" alt="">
+            <%}else{%>
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="<%=chat.ftp_us%>" style="width: 20rem; height: 20rem;" alt="">
+                <%}%>
+    </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          
+          <%if(chat.ref_am){%>
+          <a class="nav-link js-scroll-trigger" href="#about">Perfil De <%=chat.nom_us%></a>
+          <%}else{%>
+            <a class="nav-link js-scroll-trigger" href="#about">Perfil De <%=chat.use_us%></a>
+            <%}%>
+        </li>
+          <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#Publicaciones">Publicaciones</a>
+            </li>
+          <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#experience">Amigos</a>
+            </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="/LogOut">Cerrar Sesión</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+        <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+          <div class="container-fluid p-0">
+            <div class="w-100">
+              <h1 class="mb-0">Bienvenido al Perfil de: 
+                <%if(chat.ref_am){%>
+                    <span class="text-success" id="clT1"><%=chat.nom_us%></span>
+                        <%}else{%>
+                            <span class="text-success" id="clT1"><%=chat.use_us%></span>
+                            <%}%>
+                
+              </h1>
+              <div class="subheading mb-5"><%=data.nom_us%> ·
+                <span class="text-success" id="clT2"><%=data.bol_us%></span>
+              </div>
+              <%if(chat.nom_gus!=undefined){%>
+              <p class="lead mb-5">Gustos: <%=chat.nom_gus%></p>
+              <p class="lead mb-5">Música: <%=chat.nom_mus%> | ○ | Películas: <%=chat.nom_pel%> | ○ | Lectura: <%=chat.nom_lec%> | ○ | Deportes: <%=chat.nom_dep%> | ○ | VideoJuegos: <%=chat.nom_vid%></p>
+              <%}else{%>
+                <a class="btn btn-block btn-lg btn-success" href="#interests" role="button" id="clb1">Antes De Comenzar, Registra Tus Intereses!</a>
+                <%}%>
+              <h2 class="mb-0">Personaliza Meetu!
+              </h2>
+              <%if(data.nom_gus==undefined){%>
+              <div class="social-icons">
+                <a href="#" class="bg-warning" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-warning fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-danger';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-danger';}">
+                  <i class="fab"></i>
+                </a>
+                <a href="#" class="bg-danger" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-danger fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+                  <i class="fab"></i>
+                </a>
+              <a href="#" class="bg-success" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-success fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+                <i class="fab"></i>
+              </a>
+              <a href="#" class="bg-info" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-info fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+                <i class="fab"></i>
+              </a>
+              <a href="#" class="bg-dark" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-dark fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+                <i class="fab"></i>
+              </a>
+              <a href="#" class="bg-secondary" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-secondary fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-info';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-info';}">
+                <i class="fab"></i>
+              </a>
+              <%}else if(amigos!=null){%>
+                <div class="social-icons">
+                    <a href="#" class="bg-warning" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-warning fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-danger';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-danger';}">
+                      <i class="fab"></i>
+                    </a>
+                    <a href="#" class="bg-danger" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-danger fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+                      <i class="fab"></i>
+                    </a>
+                  <a href="#" class="bg-success" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-success fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+                    <i class="fab"></i>
+                  </a>
+                  <a href="#" class="bg-info" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-info fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+                    <i class="fab"></i>
+                  </a>
+                  <a href="#" class="bg-dark" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-dark fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+                    <i class="fab"></i>
+                  </a>
+                  <a href="#" class="bg-secondary" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-secondary fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-info';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-info';}">
+                    <i class="fab"></i>
+                  </a>
+                  <%}else{%>
+                    <div class="social-icons">
+                        <a href="#" class="bg-warning" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-warning fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-danger';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-danger';}">
+                          <i class="fab"></i>
+                        </a>
+                        <a href="#" class="bg-danger" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-danger fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+                          <i class="fab"></i>
+                        </a>
+                      <a href="#" class="bg-success" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-success fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+                        <i class="fab"></i>
+                      </a>
+                      <a href="#" class="bg-info" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-info fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+                        <i class="fab"></i>
+                      </a>
+                      <a href="#" class="bg-dark" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-dark fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+                        <i class="fab"></i>
+                      </a>
+                      <a href="#" class="bg-secondary" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-secondary fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-info';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-info';}">
+                        <i class="fab"></i>
+                      </a>
+              <%}%>
+              <br>
+              <h2 class="mb-0">
+                <span class="text-success" id="clT3">Contáctanos!</span>
+              </h2>
+              <div class="social-icons">
+                  <a href="https://web.facebook.com/EYE2019/">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="https://twitter.com/EYE_MeetU">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                <a href="https://www.instagram.com/eye_meet_u/?hl=es-la">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+            </div>
+        </section>
+        <hr class="m-0">
+        <input class="input--style-2" type="text" hidden="hidden" name="pubnum" id="pubnum" value="2">
+        <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="Publicaciones">
+            <div class="w-100">
+                <div class="row">
+                  <div class="col">
+                    <div class="row">
+                      <div class="col text-center">
+                        <%let id = 1; let comment = []; let nom = []; let fot = [];
+                        if(chat.ref_am){%>
+                          <h3 class="mb-0">Publicaciones De: <%=chat.nom_us%></h3>
+                            <%}else{%>
+                              <h3 class="mb-0">Publicaciones De: <%=chat.use_us%></h3>
+                            <%}%>
+                          <hr class="m-2">
+                      </div>
+                    </div>
+                    <%if(pub.length>0){
+                      for(var i = 0; i < pub.length; i++){
+                        if(pub[i].trf_pub&&chat.ref_am){
+                        %>
+                      <div class="row mb-3">
+                          <div class="col-6">
+                              <div class="row">
+                                  <div class="col text-center">
+                                    <p class="mb-2"><%=pub[i].tit_pub%></p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                <div class="col text-center">
+                                    <img class="img-fluid img-profile rounded mx-auto mb-2" src="<%=pub[i].img_pub%>" style="width: 25rem; height: 25rem;" alt="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <p class="lead mb-2"><%=pub[i].tex_pub%></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                              <div class="col text-center">
+                                <p class="lead mb-2">Reacciones: <%if(pub[i].likes != undefined){%><div id="<%=pub[i].id_pub%>like"><%=pub[i].likes%></div><%}else{%><div id="<%=pub[i].id_pub%>like">0</div><%}%></p>
+                              </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <p class="lead mb-2"><%=pub[i].log%></p>
+                                </div>
+                          </div>
+                          <div class="row">
+                            <div class="col text-center">
+                              <%if(pub[i].liked){%>
+                                <button class="btn btn-block btn-lg btn-success" onclick="return mgu('<%=pub[i].id_pub%>','<%=data.id_us%>')" id="<%=pub[i].id_pub%>" >Ya No Me Gusta</button>
+                              <%}else{%>
+                                <button class="btn btn-block btn-lg btn-success" onclick="return mgu('<%=pub[i].id_pub%>','<%=data.id_us%>')" style="background-color: gray;" id="<%=pub[i].id_pub%>" >Me Gusta</button>
+                              <%}%>
+                            </div>
+                            <div class="col text-center">
+                              <button class="btn btn-block btn-lg btn-warning" onclick="return rep('<%=pub[i].id_pub%>','<%=data.id_us%>')" >Reportar</button>
+                            </div>
+                          </div>
+                          </div>
+                            <div class="col-6">
+                                    <div class="row">
+                                        <p class="lead">Comentarios:</p>
+                                    </div>
+                                    <div id="<%=pub[i].id_pub%>com">
+                                      <%if(com.length>0&&com[i][0]!=undefined){
+                                      if(com[i][0].id_pub==pub[i].id_pub){
+                                        comment = [];
+                                        comment = com[i].tex_com.split("|||||-----|||||");
+                                        nom = [];
+                                        nom = com[i].nom.split("|||||-----|||||");
+                                        fot = [];
+                                        fot = com[i].fot.split("|||||-----|||||");
+                                        for(var h = 1; h< comment.length; h++){%>
+                                      <div class="row">
+                                        <div class="col-2">
+                                          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="<%=fot[h]%>" style="width: 4rem; height: 4rem;" alt="">
+                                        </div>
+                                        <div class="col-10">
+                                          <div class="row">
+                                            <p class="small"><%=nom[h]%>:</p>
+                                          </div>
+                                          <div class="row">
+                                            <p class="lead"><%=comment[h]%></p>
+                                          </div>
+                                        </div>
+                                        
+                                      </div>
+                                      <%}}}%>
+                                  </div>
+                                    <div class="row">
+                                        <p class="lead">Comentar:</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group">
+                                          <input class="input--style-2" type="text" id="<%=id%>" placeholder="Escribe tu comentario" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" onkeydown="return validaCom(event,'<%=id%>')" name="<%=pub[i].id_pub%>">
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                        <button class="btn btn-block btn-lg btn-danger" onclick="return clc('<%=pub[i].id_pub%>','<%=id%>','<%=data.id_us%>')">Realizar Comentario</button>
+                                    </div>
+                            </div>
+                      </div>
+                      <hr class="m-2">
+                      <%}else if(pub[i].trf_pub&&!chat.ref_am){%>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col text-center">
+                                      <p class="mb-2"><%=chat.use_us%> y tú aún no son amigos de verdad!</p>
+                                    </div>
+                                </div>
+                              <div class="row">
+                                  <div class="col text-center">
+                                      <p class="lead mb-2">Esta publicación es solo para amigos de verdad!</p>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                        <hr class="m-2">
+                        <%}else if(!pub[i].trf_pub&&!chat.ref_am){%>
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                          <p class="mb-2"><%=pub[i].tit_pub%></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col text-center">
+                                          <img class="img-fluid img-profile rounded mx-auto mb-2" src="<%=pub[i].img_pub%>" style="width: 25rem; height: 25rem;" alt="">
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col text-center">
+                                          <p class="lead mb-2"><%=pub[i].tex_pub%></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col text-center">
+                                        <p class="lead mb-2"><%=pub[i].log%></p>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col text-center">
+                                      <p class="lead mb-2">Reacciones: <%if(pub[i].likes != undefined){%><div id="<%=pub[i].id_pub%>like"><%=pub[i].likes%></div><%}else{%><div id="<%=pub[i].id_pub%>like">0</div><%}%></p>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col text-center">
+                                      <%if(pub[i].liked){%>
+                                      <button class="btn btn-block btn-lg btn-success" onclick="return mgu('<%=pub[i].id_pub%>','<%=data.id_us%>')" id="<%=pub[i].id_pub%>" >Ya No Me Gusta</button>
+                                      <%}else{%>
+                                        <button class="btn btn-block btn-lg btn-success" onclick="return mgu('<%=pub[i].id_pub%>','<%=data.id_us%>')" style="background-color: gray;" id="<%=pub[i].id_pub%>" >Me Gusta</button>
+                                      <%}%>
+                                    </div>
+                                    <div class="col text-center">
+                                      <button class="btn btn-block btn-lg btn-warning" onclick="return rep('<%=pub[i].id_pub%>','<%=id%>')">Reportar</button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row align-items-center">
+                                        <div class="col text-center">
+                                            <p class="lead mb-2">Para comentar y ver comentarios debes ser amigo de verdad de <%=chat.use_us%></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="m-2">
+                            <%}else if(!pub[i].trf_pub&&chat.ref_am){%>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col text-center">
+                                              <p class="mb-2"><%=pub[i].tit_pub%></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col text-center">
+                                              <img class="img-fluid img-profile rounded mx-auto mb-2" src="<%=pub[i].img_pub%>" style="width: 25rem; height: 25rem;" alt="">
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col text-center">
+                                              <p class="lead mb-2"><%=pub[i].tex_pub%></p>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col text-center">
+                                            <p class="lead mb-2"><%=pub[i].log%></p>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col text-center">
+                                            <p class="lead mb-2">Reacciones: <%if(pub[i].likes != undefined){%><div id="<%=pub[i].id_pub%>like"><%=pub[i].likes%></div><%}else{%><div id="<%=pub[i].id_pub%>like">0</div><%}%></p>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col text-center">
+                                          <%if(pub[i].liked){%>
+                                          <button class="btn btn-block btn-lg btn-success" onclick="return mgu('<%=pub[i].id_pub%>','<%=data.id_us%>')" id="<%=pub[i].id_pub%>" >Ya No Me Gusta</button>
+                                          <%}else{%>
+                                            <button class="btn btn-block btn-lg btn-success" onclick="return mgu('<%=pub[i].id_pub%>','<%=data.id_us%>')" style="background-color: gray;" id="<%=pub[i].id_pub%>" >Me Gusta</button>
+                                          <%}%>
+                                        </div>
+                                        <div class="col text-center">
+                                          <button class="btn btn-block btn-lg btn-warning" onclick="return rep('<%=pub[i].id_pub%>','<%=id%>')">Reportar</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <p class="lead">Comentarios:</p>
+                                        </div>
+                                        <div id="<%=pub[i].id_pub%>com">
+                                          <%if(com.length>0&&com[i][0]!=undefined){
+                                          if(com[i][0].id_pub==pub[i].id_pub){
+                                              comment = [];
+                                              comment = com[i].tex_com.split("|||||-----|||||");
+                                              nom = [];
+                                              nom = com[i].nom.split("|||||-----|||||");
+                                              fot = [];
+                                              fot = com[i].fot.split("|||||-----|||||");
+                                              for(var h = 1; h< comment.length; h++){%>
+                                            <div class="row">
+                                              <div class="col-2">
+                                                <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="<%=fot[h]%>" style="width: 4rem; height: 4rem;" alt="">
+                                              </div>
+                                              <div class="col-10">
+                                                <div class="row">
+                                                  <p class="small"><%=nom[h]%>:</p>
+                                                </div>
+                                                <div class="row">
+                                                  <p class="lead"><%=comment[h]%></p>
+                                                </div>
+                                              </div>
+                                              
+                                            </div>
+                                            <%}}}%>
+                                        </div>
+                                        <div class="row">
+                                            <p class="lead">Comentar:</p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group">
+                                              <input class="input--style-2" type="text" id="<%=id%>" placeholder="Escribe tu comentario" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" onkeydown="return validaCom(event,'<%=id%>')" name="<%=pub[i].id_pub%>">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <button class="btn btn-block btn-lg btn-danger" onclick="return clc('<%=pub[i].id_pub%>','<%=id%>','<%=data.id_us%>')">Realizar Comentario</button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <hr class="m-2">
+                                <%}id++; }}else{%>
+                    <div class="row mb-3 text-center">
+                        <div class="col text-center">
+                            <p class="lead mb-2">El usuario aún no realiza publicaciones o no las puedes ver</p>
+                        </div>
+                    </div>
+                      <%}%>
+                  </div>
+                </div>
+                <input class="input--style-2" type="text" hidden="hidden" name="def" id="deff" value="">
+                <input class="input--style-2" type="text" hidden="hidden" name="id" id="idd" value="">
+            </div>
+        </section>
+        <hr class="m-0">
+        <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="experience">
+          <div class="w-100">
+            <h2 class="mb-5">MÁS PERFILES DE AMIGOS, <%=user%></h2>
+            <div class="row align-items-start">
+                <%var isf = [];
+                  var is = [];
+                  var tr = [];
+                  var am = [];
+                if(amigos!=null){
+                  if(amigos[0]!=undefined){
+                    for(var i = 0; i < amigos.length; i++){ 
+                      if(amigos[i].isf_am!=undefined){
+                        if(!amigos[i].isf_am&&!amigos[i].rec_am){
+                          isf.push(i);
+                        }
+                      }
+                    }
+                  if(isf.length>0){ %>
+                  <%}
+                    for(var i = 0; i < amigos.length; i++){
+                      if(amigos[i].isf_am!=undefined){ 
+                      if(amigos[i].isf_am&&!amigos[i].rec_am){
+                        is.push(i);
+                      }
+                    }
+                  }
+                  if(tr.length>0){ %>
+                  <%}
+                if(amigos!=null&&is.length>3){
+                  for(var i = 0; i < 3; i++){ 
+                  if(!amigos[is[i]].ref_am&&!amigos[is[i]].blocked){%>  
+                    <div class="col">
+                      <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                          <span class="d-block d-lg-block">
+                              <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                          </span>
+                          <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%></p>
+                      </a>
+                  </div>
+                  <%}else if(!amigos[is[i]].ref_am&&amigos[is[i]].blocked){%>
+                    <div class="col">
+                        <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                          <span class="d-block d-lg-block">
+                              <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                          </span>
+                          <p class="font-weight-bold text-center text-success""><%=amigos[is[i]].use_us%> (BLOQUEADO)</p>
+                        </a>
+                  </div>
+                  <%}else if(amigos[is[i]].ref_am&&amigos[is[i]].blocked){%>
+                    <div class="col">
+                        <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                      <span class="d-block d-lg-block">
+                          <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" src="<%=amigos[is[i]].fot_us%>" alt="">
+                      </span>
+                      <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%> (BLOQUEADO)</p>
+                        </a>
+                    </div>
+                    <%}else{%>
+                    <div class="col">
+                        <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                            <span class="d-block d-lg-block">
+                                <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].fot_us%>" alt="">
+                            </span>
+                            <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].nom_us %></p>
+                        </a>
+                    </div>
+                  <%}
+                  }
+                  }else if(amigos!=null&&is.length>0){
+                  for(var i = 0; i < is.length; i++){
+                    if(!amigos[is[i]].ref_am&&!amigos[is[i]].trf_am&&!amigos[is[i]].blocked){
+                      %>  
+                  <div class="col">
+                    <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                        <span class="d-block d-lg-block">
+                            <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                        </span>
+                        <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%></p>
+                    </a>
+                </div>
+                <%}else if(amigos[is[i]].ref_am&&amigos[is[i]].trf_am&&!amigos[is[i]].blocked){%>
+                  <div class="col">
+                      <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                          <span class="d-block d-lg-block">
+                              <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].fot_us%>" alt="">
+                          </span>
+                          <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].nom_us%></p>
+                      </a>
+                  </div>
+                  <%}else if(amigos[is[i]].ref_am&&amigos[is[i]].trf_am&&amigos[is[i]].blocked){%>
+                    <div class="col">
+                        <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                          <span class="d-block d-lg-block">
+                              <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" src="<%=amigos[is[i]].fot_us%>" alt="">
+                          </span>
+                          <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].nom_us%> (BLOQUEADO)</p>
+                        </a>
+                  </div>
+                  <%}else if(!amigos[is[i]].ref_am&&!amigos[is[i]].trf_am&&amigos[is[i]].blocked){%>
+                  <%}}}%>
+                  <%}}%>
+            </div>
+            <button id="addcontact" onclick="window.location='/Amigo'"><i class="fa fa-user fa-fw" aria-hidden="true"></i> <span>Volver a Mi Perfil (<%=user%>)</span></button>
+          </div>
+        </section>
+  <script src="./vendor/jqueryyy/jquery.min.js"></script>
+  <script src="./js/globall.js"></script>
+  <script src="./vendor/jqueryy/jquery.min.js"></script>
+  <script src="./vendor/select2/select2.min.js"></script>
+  <script src="./vendor/datepicker/moment.min.js"></script>
+  <script src="./vendor/datepicker/daterangepicker.js"></script>
+  <script src="./js/global.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="./vendor/jqueryyyy/jquery.min.js"></script>
+  <script src="./vendor/bootstrapp/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="./vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="./js/resumee.min.js"></script>
+
+</body>
+
+</html>

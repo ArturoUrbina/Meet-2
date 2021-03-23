@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151120937-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-151120937-1');
+    </script>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/x-icon" href="./img/MeetULogo.png" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    <title>Match - MeetU</title>
+    <link href="./vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="./vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="./https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link href="./vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="./vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    <link href="./css/mainn.css" rel="stylesheet" media="all">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="./vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/landing-page.min.css" rel="stylesheet">
+  <style>
+        .input-group {
+          position: relative;
+          margin: 0;
+        }
+        .input-file {
+          display: none;
+        }
+
+        .input-file + label {
+          font-size: 15px;
+          color: #fff;
+          color: white;
+          line-height: 40px;
+          background-color: #666666;
+          padding: 0 20px;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
+          display: inline-block;
+          margin-right: 15px;
+          -webkit-transition: all 0.4s ease;
+          -o-transition: all 0.4s ease;
+          -moz-transition: all 0.4s ease;
+          transition: all 0.4s ease;
+          cursor: pointer;
+        }
+
+        .input-file:focus + label,
+        .input-file + label:hover {
+          background: #1b1b1b;
+        }
+
+        .input-file__info {
+          font-size: 15px;
+          color: #666;
+        }
+
+        @media (max-width: 767px) {
+          .input-file__info {
+            display: block;
+            margin-top: 6px;
+          }
+        }
+  </style>
+</head>
+<body>
+        <% include partials/header %>
+<div class="container">
+  <input class="input--style-2" type="text" hidden="hidden" name="idUser" id="idUser" value="<%=user.id_us%>">
+  <div class="row">
+    <div class="col mt-4 text-center">
+      <%if(data.length>0){%>
+        <h3 class="card-title">
+            Felicitaciones, ha hecho match con estas personas
+        </h3>
+      <table class="table table-bordered table-hover table-striped">
+        <thead>
+          <tr>
+            <td>Foto</td>
+            <td>Gusto</td>
+            <td>Porcentaje de Match</td>
+            <td>Gustos De Películas</td>
+            <td>Gustos De Música</td>
+            <td>Gustos De Deportes</td>
+            <td>Gustos De Libros</td>
+            <td>Gustos De VideoJuegos</td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (data) { %>
+            <% for(var i = 0; i < data.length; i++) { %>
+              <tr>
+                <td><img class=".img-fluid img-thumbnail rounded-circle mx-auto mb-2"  src="<%=data[i].user[0].ftp_us%>" alt=""></td>
+                <td><%=data[i].user[0].nom_gus%></td>
+                <td>%<%= data[i].coincidence%></td>
+                <td><%=data[i].user[0].nom_pel%></td>
+                <td><%=data[i].user[0].nom_mus%></td>
+                <td><%=data[i].user[0].nom_dep%></td>
+                <td><%=data[i].user[0].nom_lec%></td>
+                <td><%=data[i].user[0].nom_vid%></td>
+                <td>
+                  <a onclick="sendSoli('<%=data[i].user[0].id_us%>')" href="/friend/<%=data[i].user[0].id_us%>" class="btn btn-info -md-6 mt-4">Match</a>
+                </td>
+              </tr>
+            <% } %>
+          <% } %>
+        </tbody>
+      </table>
+      <%}else{%>
+        <h3 class="card-title">
+            Lo sentimos, no hay nadie compatible de momento, pero no pierdas la esperanza sigue buscando regularmente
+        </h3>
+            <span class="d-block d-lg-block">
+                <img class="rounded-circle mx-auto mb-2" style="width: 25rem; height: 25rem;" alt="" src="./img/Llantos.jpg" alt="">
+            </span>
+      <%}%>
+    </div>
+  </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="./js/Match.js"></script>
+<script src="./vendor/jqueryyy/jquery.min.js"></script>
+            <script src="./js/globall.js"></script>
+            <script src="./vendor/jqueryy/jquery.min.js"></script>
+            <script src="./vendor/select2/select2.min.js"></script>
+            <script src="./vendor/datepicker/moment.min.js"></script>
+            <script src="./vendor/datepicker/daterangepicker.js"></script>
+            <script src="./js/global.js"></script>
+<% include partials/footer %> 
+</body>
+<% include partials/script %>
+</html>

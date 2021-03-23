@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151120937-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-151120937-1');
+    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" type="image/x-icon" href="./img/MeetULogo.png" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+  <title>MeetU - <%=user%></title>
+  <link href="./vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+  <link href="./vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+  <!-- Font special for pages-->
+  <link href="./https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+  <link href="./vendor/select2/select2.min.css" rel="stylesheet" media="all">
+  <link href="./vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+  <link href="./css/mainn.css" rel="stylesheet" media="all">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template -->
+  <link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="./vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="./css/landing-page.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="./vendor/bootstrapp/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+  <link href="./vendor/fontawesome-freee/css/all.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="./css/resumee.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="./js/valInt.js"></script>
+  <style>
+    .input-group {
+      position: relative;
+      margin: 0;
+    }
+    .input-file {
+      display: none;
+    }
+
+    .input-file + label {
+      font-size: 15px;
+      color: #fff;
+      color: white;
+      line-height: 40px;
+      background-color: darkblue;
+      padding: 0 6rem;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-right: 5rem;
+      margin-left: 1rem;
+      -webkit-transition: all 0.4s ease;
+      -o-transition: all 0.4s ease;
+      -moz-transition: all 0.4s ease;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .input-file:focus + label,
+    .input-file + label:hover {
+      background: #1b1b1b;
+    }
+
+    .input-file__info {
+      font-size: 15px;
+      color: #666;
+    }
+
+    @media (max-width: 767px) {
+      .input-file__info {
+        display: block;
+        margin-top: 6px;
+      }
+    }
+</style>
+</head>
+
+<body id="page-top" onkeydown="return validaBody(event)">
+  <input class="input--style-2" type="text" hidden="hidden" name="idUser" id="idUser" value="<%=data.id_us%>">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="/">    
+          <span class="d-none d-lg-block">
+                <img class="img-fluid" src="./img/MeetULogo.png" alt="">
+                
+              </span>
+        </a>
+    <a class="navbar-brand js-scroll-trigger" href="/Regact">
+      <span class="d-block d-lg-none"><%=user%></span>
+      <span class="d-none d-lg-block">
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="<%=data.fot_us%>" style="width: 20rem; height: 20rem;" alt="">
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#about">Perfil</a>
+        </li>
+        <%if(data.nom_gus==undefined){%>
+          <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#interests">Configurar Intereses</a>
+            </li>
+        <%}else if(amigos!=null){%>
+          <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#experience">Amigos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#Publicaciones">Publicaciones</a>
+            </li>
+          <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#education">Match</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#interests">Modificar Intereses</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="/allF">Chat</a>
+                </li>
+        <%}else{%>
+          <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#education">Match</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#interests">Modificar Intereses</a>
+              </li>
+        <%}%>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="/LogOut">Cerrar Sesión</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+      <div class="container-fluid p-0">
+        <div class="w-100">
+          <h1 class="mb-0">Hola!
+            <span class="text-success" id="clT1"><%=user%></span>
+          </h1>
+          <div class="subheading mb-5"><%=data.nom_us%> ·
+            <span class="text-success" id="clT2"><%=data.bol_us%></span>
+          </div>
+          <%if(data.nom_gus!=undefined){%>
+          <p class="lead mb-5">Gustos: <%=data.nom_gus%></p>
+          <p class="lead mb-5">Música: <%=data.nom_mus%> | ○ | Películas: <%=data.nom_pel%> | ○ | Lectura: <%=data.nom_lec%> | ○ | Deportes: <%=data.nom_dep%> | ○ | VideoJuegos: <%=data.nom_vid%></p>
+          <%}else{%>
+            <a class="btn btn-block btn-lg btn-success" href="#interests" role="button" id="clb1">Antes De Comenzar, Registra Tus Intereses!</a>
+            <%}%>
+          <h2 class="mb-0">Personaliza Meetu!
+          </h2>
+          <%if(data.nom_gus==undefined){%>
+          <div class="social-icons">
+            <a href="#" class="bg-warning" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-warning fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-danger';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-danger';}">
+              <i class="fab"></i>
+            </a>
+            <a href="#" class="bg-danger" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-danger fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+              <i class="fab"></i>
+            </a>
+          <a href="#" class="bg-success" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-success fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+            <i class="fab"></i>
+          </a>
+          <a href="#" class="bg-info" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-info fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+            <i class="fab"></i>
+          </a>
+          <a href="#" class="bg-dark" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-dark fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+            <i class="fab"></i>
+          </a>
+          <a href="#" class="bg-secondary" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-secondary fixed-top'; for(var i = 1; i<5; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-info';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-info';}">
+            <i class="fab"></i>
+          </a>
+          <%}else if(amigos!=null){%>
+            <div class="social-icons">
+                <a href="#" class="bg-warning" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-warning fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-danger';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-danger';}">
+                  <i class="fab"></i>
+                </a>
+                <a href="#" class="bg-danger" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-danger fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+                  <i class="fab"></i>
+                </a>
+              <a href="#" class="bg-success" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-success fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+                <i class="fab"></i>
+              </a>
+              <a href="#" class="bg-info" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-info fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+                <i class="fab"></i>
+              </a>
+              <a href="#" class="bg-dark" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-dark fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+                <i class="fab"></i>
+              </a>
+              <a href="#" class="bg-secondary" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-secondary fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-info';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-info';}">
+                <i class="fab"></i>
+              </a>
+              <%}else{%>
+                <div class="social-icons">
+                    <a href="#" class="bg-warning" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-warning fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-danger';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-danger';}">
+                      <i class="fab"></i>
+                    </a>
+                    <a href="#" class="bg-danger" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-danger fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+                      <i class="fab"></i>
+                    </a>
+                  <a href="#" class="bg-success" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-success fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+                    <i class="fab"></i>
+                  </a>
+                  <a href="#" class="bg-info" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-info fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-success';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-success';}">
+                    <i class="fab"></i>
+                  </a>
+                  <a href="#" class="bg-dark" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-dark fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-warning';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-warning';}">
+                    <i class="fab"></i>
+                  </a>
+                  <a href="#" class="bg-secondary" onclick="document.getElementById('sideNav').className='navbar navbar-expand-lg navbar-dark bg-secondary fixed-top'; for(var i = 1; i<4; i++){document.getElementById('clb'+i).className='btn btn-block btn-lg btn-info';} for(var i = 1; i<4; i++){document.getElementById('clT'+i).className='text-info';}">
+                    <i class="fab"></i>
+                  </a>
+          <%}%>
+          <br>
+          <h2 class="mb-0">
+            <span class="text-success" id="clT3">Contáctanos!</span>
+          </h2>
+          <div class="social-icons">
+              <a href="https://web.facebook.com/EYE2019/">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://twitter.com/EYE_MeetU">
+                <i class="fab fa-twitter"></i>
+              </a>
+            <a href="https://www.instagram.com/eye_meet_u/?hl=es-la">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+        </div>
+    </section>
+    <hr class="m-0">
+  <%if(data.nom_gus==undefined){%>
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="interests">
+        <div class="w-100">
+                <div class="card card-2">
+                        <div class="card-body">
+                            <%if(data.nom_gus!=undefined){%>
+                              <h2 class="title">Ya haz configurado tus Intereses</h2>
+                              <a class="btn btn-block btn-lg btn-success" id="clb2" href="#education" role="button">Haz Match!</a>
+                              <%}else{%>
+                                <h2 class="title">Intereses</h2>
+                                <form method="POST" action="/Reg/Int">
+                                  <div class="input-group">
+                                      <input class="input--style-2" type="text" placeholder="Gustos (Una pequeña descripción de tu persona que será vista por todos con los que hagas Match)" id="gustos" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" onkeydown="return validaGustos(event)" name="Gustos">
+                                  </div>
+                                  <div class="row row-space">
+                                      <div class="col-4">
+                                          <div class="input-group">
+                                              <div class="rs-select2 js-select-simple select--no-search">
+                                                  <select name="Musica" id="musica">
+                                                      <option disabled="disabled" selected="selected">Música**********</option>
+                                                      <option>Dubstep</option>
+                                                      <option>Blues</option>
+                                                      <option>Country</option>
+                                                      <option>Cumbia</option>
+                                                      <option>Disco</option>
+                                                      <option>Electrónica</option>
+                                                      <option>Flamenco</option>
+                                                      <option>Folk</option>
+                                                      <option>Funk</option>
+                                                      <option>Gospel</option>
+                                                      <option>Heavy Metal</option>
+                                                      <option>Hip Hop</option>
+                                                      <option>Reggaeton</option>
+                                                      <option>Rock</option>
+                                                      <option>Rap</option>
+                                                      <option>Deathstep</option>
+                                                      <option>Alternativa</option>
+                                                      <option>SynthWave</option>
+                                                      <option>Pop</option>
+                                                      <option>Riddim</option>
+                                                      <option>Brostep</option>
+                                                      <option>Para Otakus</option>
+                                                      <option>Drum and Bass</option>
+                                                      <option>Jazz</option>
+                                                      <option>Clásica</option>
+                                                      <option>Instrumental</option>
+                                                      <option>Perreo</option>
+                                                      <option>Punk</option>
+                                                      <option>Rumba</option>
+                                                      <option>Tango</option>
+                                                      <option>Indie</option>
+                                                      <option>Soul</option>
+                                                      <option>House</option>
+                                                      <option>Techno</option>
+                                                      <option>Reggae</option>
+                                                      <option>Salsa</option>
+                                                      <option>Banda Sonora</option>
+                                                      <option>No Me Gusta</option>
+                                                  </select>
+                                                  <div class="select-dropdown"></div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-4">
+                                              <div class="input-group">
+                                                  <div class="rs-select2 js-select-simple select--no-search">
+                                                      <select name="Lectura" id="lectura">
+                                                          <option disabled="disabled" selected="selected">Lectura************</option>
+                                                          <option>Drama</option>
+                                                          <option>Terror</option>
+                                                          <option>Suspenso</option>
+                                                          <option>Sci-Fi</option>
+                                                          <option>Aventura</option>
+                                                          <option>Históricos</option>
+                                                          <option>Juvenil</option>
+                                                          <option>Futuristas</option>
+                                                          <option>Literatura Clásica</option>
+                                                          <option>Lírico</option>
+                                                          <option>Didáctico</option>
+                                                          <option>Épico</option>
+                                                          <option>Narrativo</option>
+                                                          <option>No Me Gusta</option>
+                                                      </select>
+                                                      <div class="select-dropdown"></div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-4">
+                                                  <div class="input-group">
+                                                      <div class="rs-select2 js-select-simple select--no-search">
+                                                          <select name="Peliculas" id="peliculas">
+                                                              <option disabled="disabled" selected="selected">Películas************</option>
+                                                              <option>Acción</option>
+                                                              <option>Aventuras</option>
+                                                              <option>Comedia</option>
+                                                              <option>Dramáticas</option>
+                                                              <option>Terror</option>
+                                                              <option>Musicales</option>
+                                                              <option>Ciencia Ficción</option>
+                                                              <option>Bélicas</option>
+                                                              <option>Para Otakus</option>
+                                                              <option>Suspenso</option>
+                                                              <option>Clásicas</option>
+                                                              <option>Futuristas</option>
+                                                              <option>Adultos</option>
+                                                              <option>Románticas</option>
+                                                              <option>Adaptaciones</option>
+                                                              <option>Super Héroes</option>
+                                                              <option>Animadas</option>
+                                                              <option>Infantiles</option>
+                                                              <option>Life Action</option>
+                                                              <option>Fantasia</option>
+                                                              <option>Princesas</option>
+                                                              <option>Para Otakus</option>
+                                                              <option>Para Otakus adultos</option>
+                                                              <option>Policiacas</option>
+                                                              <option>Originales De Netflix</option>
+                                                              <option>Mudas</option>
+                                                              <option>Blanco y Negro</option>
+                                                              <option>Western</option>
+                                                              <option>Crimen</option>
+                                                              <option>Del Tianguis</option>
+                                                              <option>No Me Gusta</option>
+                                                          </select>
+                                                          <div class="select-dropdown"></div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                      </div>
+                                      <div class="row row-space">
+                                              <div class="col-4">
+                                                  <div class="input-group">
+                                                      <div class="rs-select2 js-select-simple select--no-search">
+                                                          <select name="Deportes" id="deportes">
+                                                              <option disabled="disabled" selected="selected">Deportes**********</option>
+                                                              <option>Soccer</option>
+                                                              <option>Football</option>
+                                                              <option>Baseball</option>
+                                                              <option>Rugby</option>
+                                                              <option>Natación</option>
+                                                              <option>Artes Marciales</option>
+                                                              <option>Basketball</option>
+                                                              <option>Patinaje Artístico</option>
+                                                              <option>Polo</option>
+                                                              <option>Hockey</option>
+                                                              <option>Box</option>
+                                                              <option>Ballet</option>
+                                                              <option>Gimnasia</option>
+                                                              <option>Tiro Con Arco</option>
+                                                              <option>Volleyball</option>
+                                                              <option>Atletismo</option>
+                                                              <option>Ping Pong</option>
+                                                              <option>Ajedrez</option>
+                                                              <option>Frontón</option>
+                                                              <option>Gym</option>
+                                                              <option>Squash</option>
+                                                              <option>No Me Gusta</option>
+                                                          </select>
+                                                          <div class="select-dropdown"></div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-4">
+                                                      <div class="input-group">
+                                                          <div class="rs-select2 js-select-simple select--no-search">
+                                                              <select name="Video" id="video">
+                                                                  <option disabled="disabled" selected="selected">Video Juegos****</option>
+                                                                  <option>RPG</option>
+                                                                  <option>Acción</option>
+                                                                  <option>Aventura</option>
+                                                                  <option>PvP</option>
+                                                                  <option>PvE</option>
+                                                                  <option>Battle Royale</option>
+                                                                  <option>Puzzle</option>
+                                                                  <option>Suspenso</option>
+                                                                  <option>Terror</option>
+                                                                  <option>Deportivos</option>
+                                                                  <option>Arcade</option>
+                                                                  <option>Simulación</option>
+                                                                  <option>Mesa</option>
+                                                                  <option>Shooters</option>
+                                                                  <option>No Me Gusta</option>
+                                                              </select>
+                                                              <div class="select-dropdown"></div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                          </div>
+                                  <br>
+                                  <div class="p-t-30">
+                                      <button class="btn btn-block btn-lg btn-success" onclick="return validaBoton()" id="clb2" type="submit">Configurar Intereses</button>
+                                  </div>
+                                  <center><h6 class="title">Todos los campos son obligatorios para continuar</h6></center>
+                                  <%if(error!=undefined){%>
+                                    <center><h4 class="title"><%=error%></h4></center>
+                                    <%}%>
+                                </form>
+                              <%}%>
+                            
+                        </div>
+                    </div>
+        </div>
+    </section>
+    <%}else if(amigos!=null){%>
+      <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="experience">
+        <div class="w-100">
+          <h2 class="mb-5">TUS AMIGOS, <%=user%></h2>
+          <div class="row align-items-start" id="FriendContent">
+              <%var isf = [];
+                var is = [];
+                var tr = [];
+                var am = [];
+              if(amigos!=null){
+                if(amigos[0]!=undefined){
+                  for(var i = 0; i < amigos.length; i++){ 
+                    var ll = 0;
+                    for(var j = 0; j < amigos.length; j++){ 
+                      console.log(amigos[i].chat + " " + amigos[j].chat);
+                      if(amigos[j].chat < amigos[i].chat){
+                        am.splice(j,0,amigos[i]);
+                        ll++;
+                      }
+                    }
+                    if(ll==0){
+                      am.push(amigos[i]);
+                    }
+                  }
+                  amigos = am;
+                  for(var i = 0; i < amigos.length; i++){ 
+                    if(amigos[i].isf_am!=undefined){
+                      if(!amigos[i].isf_am&&!amigos[i].rec_am){
+                        isf.push(i);
+                      }
+                    }
+                  }
+                if(isf.length>0){ %>
+                  <div id="Soli">
+                    <h3 class="card-title">
+                        Posibles match han mandado solicitud!
+                    </h3>
+                    <table class="table table-bordered table-hover table-striped">
+                      <thead>
+                        <tr>
+                          <td>Foto</td>
+                          <td>Gusto</td>
+                          <td>Gustos De Películas</td>
+                          <td>Gustos De Música</td>
+                          <td>Gustos De Deportes</td>
+                          <td>Gustos De Libros</td>
+                          <td>Gustos De VideoJuegos</td>
+                          <td></td>
+                        </tr>
+                      </thead>
+                      <tbody id="SoliBody">
+                          <% for(var i = 0; i < isf.length; i++) { %>
+                            <tr id="friendR<%=i%>">
+                              <td><img class=".img-fluid img-thumbnail rounded-circle mx-auto mb-2" src="<%=amigos[isf[i]].ftp_us%>" alt=""></td>
+                              <td><%=amigos[isf[i]].nom_gus%></td>
+                              <td><%=amigos[isf[i]].nom_pel%></td>
+                              <td><%=amigos[isf[i]].nom_mus%></td>
+                              <td><%=amigos[isf[i]].nom_dep%></td>
+                              <td><%=amigos[isf[i]].nom_lec%></td>
+                              <td><%=amigos[isf[i]].nom_vid%></td>
+                              <td>
+                                <a onclick="accept('<%=amigos[isf[i]].id_us%>','<%=i%>','<%=data.id_us%>')" class="btn btn-info -md-6 mt-4">Aceptar</a>
+                                <a onclick="denied('<%=amigos[isf[i]].id_us%>','<%=i%>','<%=data.id_us%>')" class="btn btn-info -md-6 mt-4">Rechazar</a>
+                              </td>
+                            </tr>
+                          <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                <%
+                  }
+                  for(var i = 0; i < amigos.length; i++){
+                    if(amigos[i].isf_am!=undefined){ 
+                    if(amigos[i].isf_am&&!amigos[i].rec_am){
+                      is.push(i);
+                    }else if(amigos[i].isf_am&&amigos[i].rec_am&&amigos[i].trf_am&&!amigos[i].ref_am){
+                      is.push(i);
+                    }
+                  }
+                }
+                console.log(amigos);
+                for(var i = 0; i < amigos.length; i++){
+                  if(amigos[i].isf_am!=undefined){ 
+                  if(amigos[i].isf_am&&amigos[i].rec_am&&amigos[i].trf_am&&!amigos[i].ref_am){
+                    tr.push(i);
+                  }
+                }
+              }
+                if(tr.length>0){ %>
+                  <div id="TRFSoli">
+                    <h3 class="card-title">
+                        Hay amigos que quieren ser tus amigos de VERDAD!
+                    </h3>
+                    <table class="table table-bordered table-hover table-striped">
+                      <thead>
+                        <tr>
+                          <td>Foto</td>
+                          <td>Usuario</td>
+                          <td></td>
+                        </tr>
+                      </thead>
+                      <tbody id="TRFSoliBody">
+                          <% for(var i = 0; i < tr.length; i++) { %>
+                            <tr id="TRfriendR<%=i%>">
+                              <td><img class=".img-fluid img-thumbnail rounded-circle mx-auto mb-2" src="<%=amigos[tr[i]].ftp_us%>" alt=""></td>
+                              <td><%=amigos[tr[i]].use_us%></td>
+                              <td>
+                                <a onclick="acceptTRF('<%=amigos[tr[i]].id_us%>','<%=i%>','<%=data.id_us%>')" class="btn btn-info -md-6 mt-4">Aceptar Amistad Verdadera</a>
+                                <a onclick="deniedTRF('<%=amigos[tr[i]].id_us%>','<%=i%>','<%=data.id_us%>')" class="btn btn-info -md-6 mt-4">Rechazar Amistad Verdadera</a>
+                              </td>
+                            </tr>
+                          <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                <%
+                  }
+              if(amigos!=null&&is.length>3){
+                for(var i = 0; i < 3; i++){ 
+                if(!amigos[is[i]].ref_am&&!amigos[is[i]].blocked){%>  
+                  <div class="col" id="NOTtrf<%=amigos[is[i]].id_us%>">
+                    <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                        <span class="d-block d-lg-block">
+                            <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                        </span>
+                        <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%></p>
+                        <div class="center-block mx-auto">
+                            <a class="btn btn-lg btn-success center" id="TRF<%=i%>" style="color: white;" onclick="TRFrequest('<%=amigos[is[i]].id_us%>','<%=data.id_us%>','<%=i%>')" role="button">Hacer amigo de Verdad</a>
+                        </div>
+                    </a>
+                </div>
+                <%}else if(!amigos[is[i]].ref_am&&amigos[is[i]].blocked){%>
+                  <div class="col">
+                      <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                        <span class="d-block d-lg-block">
+                            <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                        </span>
+                        <p class="font-weight-bold text-center text-success""><%=amigos[is[i]].use_us%> (BLOQUEADO)</p>
+                      </a>
+                </div>
+                <%}else if(amigos[is[i]].ref_am&&amigos[is[i]].blocked){%>
+                  <div class="col">
+                      <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                    <span class="d-block d-lg-block">
+                        <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" src="<%=amigos[is[i]].fot_us%>" alt="">
+                    </span>
+                    <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%> (BLOQUEADO)</p>
+                      </a>
+                </div>
+                  <%}else if(!amigos[is[i]].ref_am&&amigos[is[i]].trf_am&&!amigos[is[i]].rec_am&&!amigos[is[i]].blocked){%>
+                    <div class="col" id="NOTtrf<%=amigos[is[i]].id_us%>">
+                        <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                      <span class="d-block d-lg-block">
+                          <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                      </span>
+                      <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%></p>
+                      <div class="center-block mx-auto">
+                        <a class="btn btn-lg btn-warning center" id="TRF<%=i%>" style="color: white;" onclick="alert('La solicitud ya ha sido enviada, seguimos esperando respuesta')" role="button">Esperando Respuesta</a>
+                    </div>
+                  </div>
+                    <%}else{%>
+                  <div class="col">
+                      <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                          <span class="d-block d-lg-block">
+                              <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].fot_us%>" alt="">
+                          </span>
+                          <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].nom_us %></p>
+                      </a>
+                  </div>
+                <%}
+                }
+                }else if(amigos!=null&&is.length>0){
+                for(var i = 0; i < is.length; i++){
+                  if(!amigos[is[i]].ref_am&&!amigos[is[i]].trf_am&&!amigos[is[i]].blocked){
+                    %>  
+                <div class="col" id="NOTtrf<%=amigos[is[i]].id_us%>">
+                  <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                      <span class="d-block d-lg-block">
+                          <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                      </span>
+                      <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%></p>
+                      <div class="center-block mx-auto">
+                          <a class="btn btn-lg btn-success center" id="TRF<%=i%>" style="color: white;" onclick="TRFrequest('<%=amigos[is[i]].id_us%>','<%=data.id_us%>','<%=i%>')" role="button">Hacer amigo de Verdad</a>
+                      </div>
+                  </a>
+              </div>
+              <%}else if(amigos[is[i]].ref_am&&!amigos[is[i]].trf_am&&!amigos[is[i]].blocked){%>
+                <div class="col">
+                    <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                        <span class="d-block d-lg-block">
+                            <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].fot_us%>" alt="">
+                        </span>
+                        <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].nom_us%></p>
+                    </a>
+                </div>
+                <%}else if(amigos[is[i]].ref_am&&!amigos[is[i]].trf_am&&amigos[is[i]].blocked){%>
+                  <div class="col">
+                      <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                        <span class="d-block d-lg-block">
+                            <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" src="<%=amigos[is[i]].fot_us%>" alt="">
+                        </span>
+                        <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].nom_us%> (BLOQUEADO)</p>
+                      </a>
+                </div>
+                <%}else if(!amigos[is[i]].ref_am&&amigos[is[i]].trf_am&&!amigos[is[i]].rec_am&&!amigos[is[i]].blocked){%>
+                  <div class="col" id="NOTtrf<%=amigos[is[i]].id_us%>">
+                      <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                    <span class="d-block d-lg-block">
+                        <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                    </span>
+                    <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%></p>
+                    <div class="center-block mx-auto">
+                      <a class="btn btn-lg btn-warning center" id="TRF<%=i%>" style="color: white;" onclick="alert('La solicitud ya ha sido enviada, seguimos esperando respuesta')" role="button">Esperando Respuesta</a>
+                  </div>
+                </div>
+                  <%}else if(!amigos[is[i]].ref_am&&!amigos[is[i]].trf_am&&amigos[is[i]].blocked){%>
+                  <div class="col">
+                      <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                    <span class="d-block d-lg-block">
+                        <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                    </span>
+                    <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%> (BLOQUEADO)</p>
+                      </a>
+            </div>
+                <%}}
+                }else if(is.length == 0 &&isf.length == 0){%>
+                  <h3 class="mb-0" id="Disposable">
+                    Accede al área de match para hacer amigos, o espera a que acepten tu solicitud!
+                  </h3>
+                <%}
+              }else{%>
+                  <h3 class="mb-0" id="Disposable">
+                    Accede al área de match para hacer amigos, o espera a que acepten tu solicitud!
+                  </h3>
+                <%}
+              }else{%>
+                <h3 class="mb-0" id="Disposable">
+                  Accede al área de match para hacer amigos, o espera a que acepten tu solicitud!
+                </h3>
+              <%}%>
+          </div>
+          <br>
+          <br>
+          <div class="row justify-content-center align-items-center">
+              <div class="col-xs-12">
+                <%if(amigos!=null){%>
+                      <div class="center-block">
+                          <a class="btn btn-block btn-lg btn-success" id="clb1" href="/allF" role="button">Todos Mis Amigos</a>
+                      </div>
+                <%}else{%>
+                  <div class="center-block">
+                      <a class="btn btn-block btn-lg btn-success" id="clb1" href="#education" role="button">Haz Match!</a>
+                  </div>
+                <%}%>
+              </div>
+          </div>
+        </div>
+  
+      </section>
+        <hr class="m-0">
+          <form action="/Pub" method="POST" enctype="multipart/form-data">
+        
+            <input class="input--style-2" type="text" hidden="hidden" name="fri" id="fri" value="2">
+            
+            <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="Publicaciones">
+            
+                <div class="w-100">
+                  <h2 class="mb-5">Publicaciones</h2>
+                    <div class="row">
+                      <div class="col-8">
+                        <div class="row">
+                          <p class="lead">Título de la publicación</p>
+                        </div>
+                        <div class="row">
+                          <div class="input-group">
+                            <input class="input--style-2 mt-3" type="text" id="titpub" placeholder="Escribe el título de tu publicación" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" onkeydown="return validaGustos(event)" name="tit">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <p class="lead mt-3">Escribe Tu publicación en el campo inferior</p>
+                        </div>
+                        <div class="row">
+                          <div class="input-group">
+                            <input class="input--style-2 mt-3" type="text" id="pub" placeholder="Escribe lo que la gente va a poder leer" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" onkeydown="return validaGustos(event)" name="pub">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <p class="lead mt-3">Elige quienes podrán ver tu publicación</p>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 text-center">
+                            <a class="btn btn-block btn-lg btn-warning mt-3 mb-3" role="button" id="btna" onclick="return clicka()">Amigos</a>
+                          </div>
+                          <div class="col-6 text-center">
+                            <a class="btn btn-block btn-lg btn-warning mt-3 mb-3" role="button" id="btnam" onclick="return clickam()">Amigos Reales y Amigos</a>
+                          </div>
+                        </div>
+                        <div class="row" id="img" hidden="hidden">
+                          <div class="value">
+                            <div class="input-group js-input-file">
+                                <input type="file" class="input-file" type="file" name="archivo" id="file" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false">
+                                <label class="label--file" for="file">Subir Foto De Publicación</label>
+                                <span class="input-file__info">Sin Imagen</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                          <button class="btn btn-block btn-lg btn-danger" onclick="return clc()" type="submit">Realizar Publicación</button>
+                        </div>
+                      </div>
+          </form>
+                      <div class="col-4">
+                        <div class="row">
+                          <div class="col text-center">
+                              <p class="lead mb-2">Publicaciones Propias</p>
+                              <hr class="m-2">
+                          </div>
+                        </div>
+                        <%if(pub!=undefined){
+                          if(pub.length>0){
+                          for(var i = 0; i < pub.length; i++){%>
+                          <div class="row mb-3">
+                              <div class="col-4">
+                                  <img class="img-fluid img-profile rounded mx-auto mb-2" src="<%=pub[i].img_pub%>" style="width: 5rem; height: 5rem;" alt="">
+                              </div>
+                              <div class="col-8">
+                                  <div class="row">
+                                      <div class="col text-center">
+                                        <p class="mb-2"><%=pub[i].tit_pub%></p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col text-center">
+                                      <p class="lead mb-2"><%=pub[i].tex_pub%></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <button class="btn btn-block btn-lg btn-success" onclick="return vm()">Ver más</button>
+                                    </div>
+                                </div>
+                              </div>
+                          </div>
+                          <%}
+                        }else{%>
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <img class="img-fluid img-profile rounded mx-auto mb-2" src="<%=data.fot_us%>" style="width: 5rem; height: 5rem;" alt="">
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col text-center">
+                                      <p class="mb-2">Descripción de la publicación</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col text-center">
+                                    <p class="lead mb-2">"Ejemplo"</p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col text-center">
+                                      <button class="btn btn-block btn-lg btn-success" onclick="return vm()">Ver más</button>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <img class="img-fluid img-profile rounded mx-auto mb-2" src="<%=data.fot_us%>" style="width: 5rem; height: 5rem;" alt="">
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col text-center">
+                                      <p class="mb-2">Descripción de la publicación</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col text-center">
+                                    <p class="lead mb-2">"Ejemplo"</p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col text-center">
+                                      <button class="btn btn-block btn-lg btn-success" onclick="return vm()">Ver más</button>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <img class="img-fluid img-profile rounded mx-auto mb-2" src="<%=data.fot_us%>" style="width: 5rem; height: 5rem;" alt="">
+                            </div>
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col text-center">
+                                      <p class="mb-2">Descripción de la publicación</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col text-center">
+                                    <p class="lead mb-2">"Ejemplo"</p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col text-center">
+                                      <button class="btn btn-block btn-lg btn-success" onclick="return vm()">Ver más</button>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                          <%}}%>
+                      </div>
+                    </div>
+                  </div>
+              </section>
+        <hr class="m-0">
+        <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="education">
+          <div class="w-100">
+            <h2 class="mb-5">Proceso de Match</h2>
+            <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+              <div class="resume-content">
+                <h3 class="mb-0">Bienvenido al NUEVO servicio de match de MeetU!</h3>
+              <div class="subheading mb-3">Ahora podrás personalizar tu experiencia de match en MeetU</div>
+              </div>
+            </div>
+            <div class="row row-space" id="main">
+              <div class="col">
+                  <div class="input-group">
+                      <div class="rs-select2 js-select-simple select--no-search">
+                          <select name="main" id="método" onchange="main()">
+                              <option selected="selected">Primero selecciona tú método de Match favorito</option>
+                              <option>Clásico (Recomendado para principiantes)*</option>
+                              <option>Por Escuela/Carrera</option>
+                              <option>Por Gustos Musicales</option>
+                              <option>Por Gustos Deportivos</option>
+                              <option>Por Gustos De Lectura</option>
+                              <option>Por Gustos De Películas</option>
+                              <option>Por Gustos De Videojuegos</option>
+                          </select>
+                          <div class="select-dropdown"></div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row row-space">
+              <div class="col-6" hidden="hidden" id="one">
+                  <div class="input-group">
+                      <div class="rs-select2 js-select-simple select--no-search">
+                          <select name="second" id="uno" onchange="second()">
+                          </select>
+                          <div class="select-dropdown"></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-6" hidden="hidden" id="two">
+                <div class="input-group">
+                    <div class="rs-select2 js-select-simple select--no-search">
+                        <select name="third" id="dos" onchange="third()">
+                        </select>
+                        <div class="select-dropdown"></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <%if(data.nom_gus!=undefined){%>
+              <form method="POST" action="/Match">
+                <input class="input--style-2" type="text" hidden="hidden" name="cri" id="opt">
+                <input class="input--style-2" type="text" hidden="hidden" name="crit" id="mein">
+                <input class="input--style-2" type="text" hidden="hidden" name="crite" id="segond">
+                <input class="input--style-2" type="text" hidden="hidden" name="criter" id="fird">
+                <button class="btn btn-block btn-lg btn-success" id="clb2" style="background-color:grey" onclick="return match()" type="submit">MATCH</button>
+                <div class="subheading mb-2">*En el método clásico, MeetU te emparejará con las personas más afines a ti, es el más recomendado si eres nuevo en la página y buscas adquirir experiencia</div>
+                <div class="subheading mb-2">**Un criterio de búsqueda alto te dará más oportunidad de encontrar alguien como tú, lo más recomendado es elegir uno alto, sin embargo, si no logras hacer match, te recomendamos reducir tu criterio, un 0% te emparejará con todos</div>
+                <%}else{%>
+                <a class="btn btn-block btn-lg btn-success" id="clb2" href="#interests" role="button">Primero Registra tus intereses!</a>
+              <%}%>
+            </form>
+          </div>
+        </section>
+        <hr class="m-0">
+        <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="interests">
+            <div class="w-100">
+                    <div class="card card-2">
+                            <div class="card-body">
+                                <%if(data.nom_gus!=undefined){%>
+                                  <h2 class="title">Ya haz configurado tus Intereses</h2>
+                                    <form method="POST" action="/Act/Int">
+                                      <div class="input-group">
+                                        <input class="input--style-2" type="text" id="gustos" placeholder="Gustos (Una pequeña descripción de tu persona que será vista por todos con los que hagas Match)" id="gustos" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" onkeydown="return validaGustos(event)" name="Gustos" value="<%=data.nom_gus%>">
+                                      </div>
+                                      <div class="row row-space">
+                                          <div class="col-4">
+                                              <div class="input-group">
+                                                  <div class="rs-select2 js-select-simple select--no-search">
+                                                      <select name="Musica" id="musica">
+                                                          <option selected="selected"><%=data.nom_mus%></option>
+                                                          <option>Dubstep</option>
+                                                          <option>Blues</option>
+                                                          <option>Country</option>
+                                                          <option>Cumbia</option>
+                                                          <option>Disco</option>
+                                                          <option>Electrónica</option>
+                                                          <option>Flamenco</option>
+                                                          <option>Folk</option>
+                                                          <option>Funk</option>
+                                                          <option>Gospel</option>
+                                                          <option>Heavy Metal</option>
+                                                          <option>Hip Hop</option>
+                                                          <option>Reggaeton</option>
+                                                          <option>Rock</option>
+                                                          <option>Rap</option>
+                                                          <option>Deathstep</option>
+                                                          <option>Alternativa</option>
+                                                          <option>SynthWave</option>
+                                                          <option>Pop</option>
+                                                          <option>Riddim</option>
+                                                          <option>Brostep</option>
+                                                          <option>Para Otakus</option>
+                                                          <option>Drum and Bass</option>
+                                                          <option>Jazz</option>
+                                                          <option>Clásica</option>
+                                                          <option>Instrumental</option>
+                                                          <option>Perreo</option>
+                                                          <option>Punk</option>
+                                                          <option>Rumba</option>
+                                                          <option>Tango</option>
+                                                          <option>Indie</option>
+                                                          <option>Soul</option>
+                                                          <option>House</option>
+                                                          <option>Techno</option>
+                                                          <option>Reggae</option>
+                                                          <option>Salsa</option>
+                                                          <option>Banda Sonora</option>
+                                                          <option>No Me Gusta</option>
+                                                      </select>
+                                                      <div class="select-dropdown"></div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="col-4">
+                                                  <div class="input-group">
+                                                      <div class="rs-select2 js-select-simple select--no-search">
+                                                          <select name="Lectura" id="lectura">
+                                                              <option selected="selected"><%=data.nom_lec%></option>
+                                                              <option>Drama</option>
+                                                              <option>Terror</option>
+                                                              <option>Suspenso</option>
+                                                              <option>Sci-Fi</option>
+                                                              <option>Aventura</option>
+                                                              <option>Históricos</option>
+                                                              <option>Juvenil</option>
+                                                              <option>Futuristas</option>
+                                                              <option>Literatura Clásica</option>
+                                                              <option>Lírico</option>
+                                                              <option>Didáctico</option>
+                                                              <option>Épico</option>
+                                                              <option>Narrativo</option>
+                                                              <option>No Me Gusta</option>
+                                                          </select>
+                                                          <div class="select-dropdown"></div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-4">
+                                                      <div class="input-group">
+                                                          <div class="rs-select2 js-select-simple select--no-search">
+                                                              <select name="Peliculas" id="peliculas">
+                                                                  <option selected="selected"><%=data.nom_pel%></option>
+                                                                  <option>Acción</option>
+                                                                  <option>Aventuras</option>
+                                                                  <option>Comedia</option>
+                                                                  <option>Dramáticas</option>
+                                                                  <option>Terror</option>
+                                                                  <option>Musicales</option>
+                                                                  <option>Ciencia Ficción</option>
+                                                                  <option>Bélicas</option>
+                                                                  <option>Para Otakus</option>
+                                                                  <option>Suspenso</option>
+                                                                  <option>Clásicas</option>
+                                                                  <option>Futuristas</option>
+                                                                  <option>Adultos</option>
+                                                                  <option>Románticas</option>
+                                                                  <option>Adaptaciones</option>
+                                                                  <option>Super Héroes</option>
+                                                                  <option>Animadas</option>
+                                                                  <option>Infantiles</option>
+                                                                  <option>Life Action</option>
+                                                                  <option>Fantasia</option>
+                                                                  <option>Princesas</option>
+                                                                  <option>Para Otakus</option>
+                                                                  <option>Para Otakus adultos</option>
+                                                                  <option>Policiacas</option>
+                                                                  <option>Originales De Netflix</option>
+                                                                  <option>Mudas</option>
+                                                                  <option>Blanco y Negro</option>
+                                                                  <option>Western</option>
+                                                                  <option>Crimen</option>
+                                                                  <option>Del Tianguis</option>
+                                                                  <option>No Me Gusta</option>
+                                                              </select>
+                                                              <div class="select-dropdown"></div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                          </div>
+                                          <div class="row row-space">
+                                                  <div class="col-4">
+                                                      <div class="input-group">
+                                                          <div class="rs-select2 js-select-simple select--no-search">
+                                                              <select name="Deportes" id="deportes">
+                                                                  <option selected="selected"><%=data.nom_dep%></option>
+                                                                  <option>Soccer</option>
+                                                                  <option>Football</option>
+                                                                  <option>Baseball</option>
+                                                                  <option>Rugby</option>
+                                                                  <option>Natación</option>
+                                                                  <option>Artes Marciales</option>
+                                                                  <option>Basketball</option>
+                                                                  <option>Patinaje Artístico</option>
+                                                                  <option>Polo</option>
+                                                                  <option>Hockey</option>
+                                                                  <option>Box</option>
+                                                                  <option>Ballet</option>
+                                                                  <option>Gimnasia</option>
+                                                                  <option>Tiro Con Arco</option>
+                                                                  <option>Volleyball</option>
+                                                                  <option>Atletismo</option>
+                                                                  <option>Ping Pong</option>
+                                                                  <option>Ajedrez</option>
+                                                                  <option>Frontón</option>
+                                                                  <option>Gym</option>
+                                                                  <option>Squash</option>
+                                                                  <option>No Me Gusta</option>
+                                                              </select>
+                                                              <div class="select-dropdown"></div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-4">
+                                                          <div class="input-group">
+                                                              <div class="rs-select2 js-select-simple select--no-search">
+                                                                  <select name="Video" id="video">
+                                                                      <option selected="selected"><%=data.nom_vid%></option>
+                                                                      <option>RPG</option>
+                                                                      <option>Acción</option>
+                                                                      <option>Aventura</option>
+                                                                      <option>PvP</option>
+                                                                      <option>PvE</option>
+                                                                      <option>Battle Royale</option>
+                                                                      <option>Puzzle</option>
+                                                                      <option>Suspenso</option>
+                                                                      <option>Terror</option>
+                                                                      <option>Deportivos</option>
+                                                                      <option>Arcade</option>
+                                                                      <option>Simulación</option>
+                                                                      <option>Mesa</option>
+                                                                      <option>Shooters</option>
+                                                                      <option>No Me Gusta</option>
+                                                                  </select>
+                                                                  <div class="select-dropdown"></div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                              </div>
+                                      <br>
+                                      <div class="p-t-30">
+                                          <button class="btn btn-block btn-lg btn-success" onclick="return validaBoton()" id="clb3" type="submit">Actualizar Intereses</button>
+                                      </div>
+                                      <center><h6 class="title">Puedes modificar solo los que consideres necesarios y dejar los demás campos igual</h6></center>
+                                      <%if(error!=undefined){%>
+                                        <center><h4 class="title"><%=error%></h4></center>
+                                        <%}%>
+                                    </form>
+                                  <%}%>
+                                
+                            </div>
+                        </div>
+            </div>
+        </section>
+      <%}else{%>
+          <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="education">
+            <div class="w-100">
+              <h2 class="mb-5">Proceso de Match</h2>
+              <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+                <div class="resume-content">
+                  <h3 class="mb-0">Bienvenido al NUEVO servicio de match de MeetU!</h3>
+                <div class="subheading mb-3">Ahora podrás personalizar tu experiencia de match en MeetU</div>
+                </div>
+              </div>
+              <div class="row row-space" id="main">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="rs-select2 js-select-simple select--no-search">
+                            <select name="main" id="método" onchange="main()">
+                                <option selected="selected">Primero selecciona tú método de Match favorito</option>
+                                <option>Clásico (Recomendado para principiantes)*</option>
+                                <option>Por Escuela/Carrera</option>
+                                <option>Por Gustos Musicales</option>
+                                <option>Por Gustos Deportivos</option>
+                                <option>Por Gustos De Lectura</option>
+                                <option>Por Gustos De Películas</option>
+                                <option>Por Gustos De Videojuegos</option>
+                            </select>
+                            <div class="select-dropdown"></div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row row-space">
+                <div class="col-6" hidden="hidden" id="one">
+                    <div class="input-group">
+                        <div class="rs-select2 js-select-simple select--no-search">
+                            <select name="second" id="uno" onchange="second()">
+                            </select>
+                            <div class="select-dropdown"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6" hidden="hidden" id="two">
+                  <div class="input-group">
+                      <div class="rs-select2 js-select-simple select--no-search">
+                          <select name="third" id="dos" onchange="third()">
+                          </select>
+                          <div class="select-dropdown"></div>
+                      </div>
+                  </div>
+              </div>
+              </div>
+              <%if(data.nom_gus!=undefined){%>
+                <form method="POST" action="/Match">
+                  <input class="input--style-2" type="text" hidden="hidden" name="cri" id="opt">
+                  <input class="input--style-2" type="text" hidden="hidden" name="crit" id="mein">
+                  <input class="input--style-2" type="text" hidden="hidden" name="crite" id="segond">
+                  <input class="input--style-2" type="text" hidden="hidden" name="criter" id="fird">
+                  <button class="btn btn-block btn-lg btn-success" id="clb2" style="background-color:grey" onclick="return match()" type="submit">MATCH</button>
+                  <div class="subheading mb-2">*En el método clásico, MeetU te emparejará con las personas más afines a ti, es el más recomendado si eres nuevo en la página y buscas adquirir experiencia</div>
+                  <div class="subheading mb-2">**Un criterio de búsqueda alto te dará más oportunidad de encontrar alguien como tú, lo más recomendado es elegir uno alto, sin embargo, si no logras hacer match, te recomendamos reducir tu criterio, un 0% te emparejará con todos</div>
+                  <%}else{%>
+                  <a class="btn btn-block btn-lg btn-success" id="clb2" href="#interests" role="button">Primero Registra tus intereses!</a>
+                <%}%>
+              </form>
+            </div>
+          </section>
+          <hr class="m-0">
+          <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="interests">
+              <div class="w-100">
+                      <div class="card card-2">
+                              <div class="card-body">
+                                  <%if(data.nom_gus!=undefined){%>
+                                    <h2 class="title">Ya haz configurado tus Intereses</h2>
+                                      <form method="POST" action="/Act/Int">
+                                        <div class="input-group">
+                                          <input class="input--style-2" type="text" id="gustos" placeholder="Gustos (Una pequeña descripción de tu persona que será vista por todos con los que hagas Match)" id="gustos" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" onkeydown="return validaGustos(event)" name="Gustos" value="<%=data.nom_gus%>">
+                                        </div>
+                                        <div class="row row-space">
+                                            <div class="col-4">
+                                                <div class="input-group">
+                                                    <div class="rs-select2 js-select-simple select--no-search">
+                                                        <select name="Musica" id="musica">
+                                                            <option selected="selected"><%=data.nom_mus%></option>
+                                                            <option>Dubstep</option>
+                                                            <option>Blues</option>
+                                                            <option>Country</option>
+                                                            <option>Cumbia</option>
+                                                            <option>Disco</option>
+                                                            <option>Electrónica</option>
+                                                            <option>Flamenco</option>
+                                                            <option>Folk</option>
+                                                            <option>Funk</option>
+                                                            <option>Gospel</option>
+                                                            <option>Heavy Metal</option>
+                                                            <option>Hip Hop</option>
+                                                            <option>Reggaeton</option>
+                                                            <option>Rock</option>
+                                                            <option>Rap</option>
+                                                            <option>Deathstep</option>
+                                                            <option>Alternativa</option>
+                                                            <option>SynthWave</option>
+                                                            <option>Pop</option>
+                                                            <option>Riddim</option>
+                                                            <option>Brostep</option>
+                                                            <option>Para Otakus</option>
+                                                            <option>Drum and Bass</option>
+                                                            <option>Jazz</option>
+                                                            <option>Clásica</option>
+                                                            <option>Instrumental</option>
+                                                            <option>Perreo</option>
+                                                            <option>Punk</option>
+                                                            <option>Rumba</option>
+                                                            <option>Tango</option>
+                                                            <option>Indie</option>
+                                                            <option>Soul</option>
+                                                            <option>House</option>
+                                                            <option>Techno</option>
+                                                            <option>Reggae</option>
+                                                            <option>Salsa</option>
+                                                            <option>Banda Sonora</option>
+                                                            <option>No Me Gusta</option>
+                                                        </select>
+                                                        <div class="select-dropdown"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                    <div class="input-group">
+                                                        <div class="rs-select2 js-select-simple select--no-search">
+                                                            <select name="Lectura" id="lectura">
+                                                                <option selected="selected"><%=data.nom_lec%></option>
+                                                                <option>Drama</option>
+                                                                <option>Terror</option>
+                                                                <option>Suspenso</option>
+                                                                <option>Sci-Fi</option>
+                                                                <option>Aventura</option>
+                                                                <option>Históricos</option>
+                                                                <option>Juvenil</option>
+                                                                <option>Futuristas</option>
+                                                                <option>Literatura Clásica</option>
+                                                                <option>Lírico</option>
+                                                                <option>Didáctico</option>
+                                                                <option>Épico</option>
+                                                                <option>Narrativo</option>
+                                                                <option>No Me Gusta</option>
+                                                            </select>
+                                                            <div class="select-dropdown"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                        <div class="input-group">
+                                                            <div class="rs-select2 js-select-simple select--no-search">
+                                                                <select name="Peliculas" id="peliculas">
+                                                                    <option selected="selected"><%=data.nom_pel%></option>
+                                                                    <option>Acción</option>
+                                                                    <option>Aventuras</option>
+                                                                    <option>Comedia</option>
+                                                                    <option>Dramáticas</option>
+                                                                    <option>Terror</option>
+                                                                    <option>Musicales</option>
+                                                                    <option>Ciencia Ficción</option>
+                                                                    <option>Bélicas</option>
+                                                                    <option>Para Otakus</option>
+                                                                    <option>Suspenso</option>
+                                                                    <option>Clásicas</option>
+                                                                    <option>Futuristas</option>
+                                                                    <option>Adultos</option>
+                                                                    <option>Románticas</option>
+                                                                    <option>Adaptaciones</option>
+                                                                    <option>Super Héroes</option>
+                                                                    <option>Animadas</option>
+                                                                    <option>Infantiles</option>
+                                                                    <option>Life Action</option>
+                                                                    <option>Fantasia</option>
+                                                                    <option>Princesas</option>
+                                                                    <option>Para Otakus</option>
+                                                                    <option>Para Otakus adultos</option>
+                                                                    <option>Policiacas</option>
+                                                                    <option>Originales De Netflix</option>
+                                                                    <option>Mudas</option>
+                                                                    <option>Blanco y Negro</option>
+                                                                    <option>Western</option>
+                                                                    <option>Crimen</option>
+                                                                    <option>Del Tianguis</option>
+                                                                    <option>No Me Gusta</option>
+                                                                </select>
+                                                                <div class="select-dropdown"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            <div class="row row-space">
+                                                    <div class="col-4">
+                                                        <div class="input-group">
+                                                            <div class="rs-select2 js-select-simple select--no-search">
+                                                                <select name="Deportes" id="deportes">
+                                                                    <option selected="selected"><%=data.nom_dep%></option>
+                                                                    <option>Soccer</option>
+                                                                    <option>Football</option>
+                                                                    <option>Baseball</option>
+                                                                    <option>Rugby</option>
+                                                                    <option>Natación</option>
+                                                                    <option>Artes Marciales</option>
+                                                                    <option>Basketball</option>
+                                                                    <option>Patinaje Artístico</option>
+                                                                    <option>Polo</option>
+                                                                    <option>Hockey</option>
+                                                                    <option>Box</option>
+                                                                    <option>Ballet</option>
+                                                                    <option>Gimnasia</option>
+                                                                    <option>Tiro Con Arco</option>
+                                                                    <option>Volleyball</option>
+                                                                    <option>Atletismo</option>
+                                                                    <option>Ping Pong</option>
+                                                                    <option>Ajedrez</option>
+                                                                    <option>Frontón</option>
+                                                                    <option>Gym</option>
+                                                                    <option>Squash</option>
+                                                                    <option>No Me Gusta</option>
+                                                                </select>
+                                                                <div class="select-dropdown"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                            <div class="input-group">
+                                                                <div class="rs-select2 js-select-simple select--no-search">
+                                                                    <select name="Video" id="video">
+                                                                        <option selected="selected"><%=data.nom_vid%></option>
+                                                                        <option>RPG</option>
+                                                                  <option>Acción</option>
+                                                                  <option>Aventura</option>
+                                                                  <option>PvP</option>
+                                                                  <option>PvE</option>
+                                                                  <option>Battle Royale</option>
+                                                                  <option>Puzzle</option>
+                                                                  <option>Suspenso</option>
+                                                                  <option>Terror</option>
+                                                                  <option>Deportivos</option>
+                                                                  <option>Arcade</option>
+                                                                  <option>Simulación</option>
+                                                                  <option>Mesa</option>
+                                                                  <option>Shooters</option>
+                                                                  <option>No Me Gusta</option>
+                                                                    </select>
+                                                                    <div class="select-dropdown"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                        <br>
+                                        <div class="p-t-30">
+                                            <button class="btn btn-block btn-lg btn-success" onclick="return validaBoton()" id="clb2" type="submit">Actualizar Intereses</button>
+                                        </div>
+                                        <center><h6 class="title">Puedes modificar solo los que consideres necesarios y dejar los demás campos igual</h6></center>
+                                        <%if(error!=undefined){%>
+                                          <center><h4 class="title"><%=error%></h4></center>
+                                          <%}%>
+                                      </form>
+                                    <%}%>
+                                  
+                              </div>
+                          </div>
+              </div>
+          </section>
+          <hr class="m-0">
+          <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="experience">
+            <div class="w-100">
+              <h2 class="mb-5">TUS AMIGOS, <%=user%></h2>
+              <div class="row align-items-start" id="FriendContent">
+                  <%var isf = [];
+                    var is = [];
+                    var tr = [];
+                    var am = [];
+                  if(amigos!=null){
+                    if(amigos[0]!=undefined){
+                      for(var i = 0; i < amigos.length; i++){ 
+                        var ll = 0;
+                        for(var j = 0; j < amigos.length; j++){ 
+                          console.log(amigos[i].chat + " " + amigos[j].chat);
+                          if(amigos[j].chat < amigos[i].chat){
+                            am.splice(j,0,amigos[i]);
+                            ll++;
+                          }
+                        }
+                        if(ll==0){
+                          am.push(amigos[i]);
+                        }
+                      }
+                      amigos = am;
+                      for(var i = 0; i < amigos.length; i++){ 
+                        if(amigos[i].isf_am!=undefined){
+                          if(!amigos[i].isf_am&&!amigos[i].rec_am){
+                            isf.push(i);
+                          }
+                        }
+                      }
+                    if(isf.length>0){ %>
+                      <div id="Soli">
+                        <h3 class="card-title">
+                            Posibles match han mandado solicitud!
+                        </h3>
+                        <table class="table table-bordered table-hover table-striped">
+                          <thead>
+                            <tr>
+                              <td>Foto</td>
+                              <td>Gusto</td>
+                              <td>Gustos De Películas</td>
+                              <td>Gustos De Música</td>
+                              <td>Gustos De Deportes</td>
+                              <td>Gustos De Libros</td>
+                              <td>Gustos De VideoJuegos</td>
+                              <td></td>
+                            </tr>
+                          </thead>
+                          <tbody id="SoliBody">
+                              <% for(var i = 0; i < isf.length; i++) { %>
+                                <tr id="friendR<%=i%>">
+                                  <td><img class=".img-fluid img-thumbnail rounded-circle mx-auto mb-2" src="<%=amigos[isf[i]].ftp_us%>" alt=""></td>
+                                  <td><%=amigos[isf[i]].nom_gus%></td>
+                                  <td><%=amigos[isf[i]].nom_pel%></td>
+                                  <td><%=amigos[isf[i]].nom_mus%></td>
+                                  <td><%=amigos[isf[i]].nom_dep%></td>
+                                  <td><%=amigos[isf[i]].nom_lec%></td>
+                                  <td><%=amigos[isf[i]].nom_vid%></td>
+                                  <td>
+                                    <a onclick="accept('<%=amigos[isf[i]].id_us%>','<%=i%>','<%=data.id_us%>')" class="btn btn-info -md-6 mt-4">Aceptar</a>
+                                    <a onclick="denied('<%=amigos[isf[i]].id_us%>','<%=i%>','<%=data.id_us%>')" class="btn btn-info -md-6 mt-4">Rechazar</a>
+                                  </td>
+                                </tr>
+                              <% } %>
+                          </tbody>
+                        </table>
+                      </div>
+                    <%
+                      }
+                      for(var i = 0; i < amigos.length; i++){
+                        if(amigos[i].isf_am!=undefined){ 
+                        if(amigos[i].isf_am&&!amigos[i].rec_am){
+                          is.push(i);
+                        }else if(amigos[i].isf_am&&amigos[i].rec_am&&amigos[i].trf_am&&!amigos[i].ref_am){
+                          is.push(i);
+                        }
+                      }
+                    }
+                    console.log(amigos);
+                    for(var i = 0; i < amigos.length; i++){
+                      if(amigos[i].isf_am!=undefined){ 
+                      if(amigos[i].isf_am&&amigos[i].rec_am&&amigos[i].trf_am&&!amigos[i].ref_am){
+                        tr.push(i);
+                      }
+                    }
+                  }
+                    if(tr.length>0){ %>
+                      <div id="TRFSoli">
+                        <h3 class="card-title">
+                            Hay amigos que quieren ser tus amigos de VERDAD!
+                        </h3>
+                        <table class="table table-bordered table-hover table-striped">
+                          <thead>
+                            <tr>
+                              <td>Foto</td>
+                              <td>Usuario</td>
+                              <td></td>
+                            </tr>
+                          </thead>
+                          <tbody id="TRFSoliBody">
+                              <% for(var i = 0; i < tr.length; i++) { %>
+                                <tr id="TRfriendR<%=i%>">
+                                  <td><img class=".img-fluid img-thumbnail rounded-circle mx-auto mb-2" src="<%=amigos[tr[i]].ftp_us%>" alt=""></td>
+                                  <td><%=amigos[tr[i]].use_us%></td>
+                                  <td>
+                                    <a onclick="acceptTRF('<%=amigos[tr[i]].id_us%>','<%=i%>','<%=data.id_us%>')" class="btn btn-info -md-6 mt-4">Aceptar Amistad Verdadera</a>
+                                    <a onclick="deniedTRF('<%=amigos[tr[i]].id_us%>','<%=i%>','<%=data.id_us%>')" class="btn btn-info -md-6 mt-4">Rechazar Amistad Verdadera</a>
+                                  </td>
+                                </tr>
+                              <% } %>
+                          </tbody>
+                        </table>
+                      </div>
+                    <%
+                      }
+                  if(amigos!=null&&is.length>3){
+                    for(var i = 0; i < 3; i++){ 
+                    if(!amigos[is[i]].ref_am&&!amigos[is[i]].blocked){%>  
+                      <div class="col" id="NOTtrf<%=amigos[is[i]].id_us%>">
+                        <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                            <span class="d-block d-lg-block">
+                                <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                            </span>
+                            <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%></p>
+                            <div class="center-block mx-auto">
+                                <a class="btn btn-lg btn-success center" id="TRF<%=i%>" style="color: white;" onclick="TRFrequest('<%=amigos[is[i]].id_us%>','<%=data.id_us%>','<%=i%>')" role="button">Hacer amigo de Verdad</a>
+                            </div>
+                        </a>
+                    </div>
+                    <%}else if(!amigos[is[i]].ref_am&&amigos[is[i]].blocked){%>
+                      <div class="col">
+                          <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                            <span class="d-block d-lg-block">
+                                <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                            </span>
+                            <p class="font-weight-bold text-center text-success""><%=amigos[is[i]].use_us%> (BLOQUEADO)</p>
+                          </a>
+                    </div>
+                    <%}else if(amigos[is[i]].ref_am&&amigos[is[i]].blocked){%>
+                      <div class="col">
+                          <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                        <span class="d-block d-lg-block">
+                            <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" src="<%=amigos[is[i]].fot_us%>" alt="">
+                        </span>
+                        <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%> (BLOQUEADO)</p>
+                          </a>
+                    </div>
+                      <%}else if(!amigos[is[i]].ref_am&&amigos[is[i]].trf_am&&!amigos[is[i]].rec_am&&!amigos[is[i]].blocked){%>
+                        <div class="col" id="NOTtrf<%=amigos[is[i]].id_us%>">
+                            <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                          <span class="d-block d-lg-block">
+                              <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                          </span>
+                          <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].nom_us%></p>
+                          <div class="center-block mx-auto">
+                            <a class="btn btn-lg btn-warning center" id="TRF<%=i%>" style="color: white;" onclick="alert('La solicitud ya ha sido enviada, seguimos esperando respuesta')" role="button">Esperando Respuesta</a>
+                        </div>
+                      </div>
+                        <%}else{%>
+                      <div class="col">
+                          <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                              <span class="d-block d-lg-block">
+                                  <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].fot_us%>" alt="">
+                              </span>
+                              <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].nom_us %></p>
+                          </a>
+                      </div>
+                    <%}
+                    }
+                    }else if(amigos!=null&&is.length>0){
+                    for(var i = 0; i < is.length; i++){
+                      if(!amigos[is[i]].ref_am&&!amigos[is[i]].trf_am&&!amigos[is[i]].blocked){
+                        %>  
+                    <div class="col" id="NOTtrf<%=amigos[is[i]].id_us%>">
+                      <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                          <span class="d-block d-lg-block">
+                              <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                          </span>
+                          <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%></p>
+                          <div class="center-block mx-auto">
+                              <a class="btn btn-lg btn-success center" id="TRF<%=i%>" style="color: white;" onclick="TRFrequest('<%=amigos[is[i]].id_us%>','<%=data.id_us%>','<%=i%>')" role="button">Hacer amigo de Verdad</a>
+                          </div>
+                      </a>
+                  </div>
+                  <%}else if(amigos[is[i]].ref_am&&!amigos[is[i]].trf_am&&!amigos[is[i]].blocked){%>
+                    <div class="col">
+                        <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                            <span class="d-block d-lg-block">
+                                <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].fot_us%>" alt="">
+                            </span>
+                            <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].nom_us%></p>
+                        </a>
+                    </div>
+                    <%}else if(amigos[is[i]].ref_am&&!amigos[is[i]].trf_am&&amigos[is[i]].blocked){%>
+                      <div class="col">
+                          <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                            <span class="d-block d-lg-block">
+                                <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" src="<%=amigos[is[i]].fot_us%>" alt="">
+                            </span>
+                            <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].nom_us%> (BLOQUEADO)</p>
+                          </a>
+                    </div>
+                    <%}else if(!amigos[is[i]].ref_am&&amigos[is[i]].trf_am&&!amigos[is[i]].rec_am&&!amigos[is[i]].blocked){%>
+                      <div class="col" id="NOTtrf<%=amigos[is[i]].id_us%>">
+                          <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                        <span class="d-block d-lg-block">
+                            <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem;" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                        </span>
+                        <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].nom_us%></p>
+                        <div class="center-block mx-auto">
+                          <a class="btn btn-lg btn-warning center" id="TRF<%=i%>" style="color: white;" onclick="alert('La solicitud ya ha sido enviada, seguimos esperando respuesta')" role="button">Esperando Respuesta</a>
+                      </div>
+                    </div>
+                      <%}else if(!amigos[is[i]].ref_am&&!amigos[is[i]].trf_am&&amigos[is[i]].blocked){%>
+                      <div class="col">
+                          <a class="navbar-brand js-scroll-trigger" href="/profile/<%=amigos[is[i]].id_us%>">
+                        <span class="d-block d-lg-block">
+                            <img class="img-fluid img-thumbnail img-profile rounded-circle mx-auto mb-2" alt="" style="width: 20rem; height: 20rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" src="<%=amigos[is[i]].ftp_us%>" alt="">
+                        </span>
+                        <p class="font-weight-bold text-center text-success"><%=amigos[is[i]].use_us%> (BLOQUEADO)</p>
+                          </a>
+                </div>
+                    <%}}
+                    }else if(is.length == 0 &&isf.length == 0){%>
+                      <h3 class="mb-0" id="Disposable">
+                        Accede al área de match para hacer amigos, o espera a que acepten tu solicitud!
+                      </h3>
+                    <%}
+                  }else{%>
+                      <h3 class="mb-0" id="Disposable">
+                        Accede al área de match para hacer amigos, o espera a que acepten tu solicitud!
+                      </h3>
+                    <%}
+                  }else{%>
+                    <h3 class="mb-0" id="Disposable">
+                      Accede al área de match para hacer amigos, o espera a que acepten tu solicitud!
+                    </h3>
+                  <%}%>
+              </div>
+              <br>
+              <br>
+              <div class="row justify-content-center align-items-center">
+                  <div class="col-xs-12">
+                    <%if(amigos!=null){%>
+                          <div class="center-block">
+                              <a class="btn btn-block btn-lg btn-success" id="clb1" href="/allF" role="button">Todos Mis Amigos</a>
+                          </div>
+                    <%}else{%>
+                      <div class="center-block">
+                          <a class="btn btn-block btn-lg btn-success" id="clb1" href="#education" role="button">Haz Match!</a>
+                      </div>
+                    <%}%>
+                  </div>
+              </div>
+            </div>
+      
+          </section>
+        <%}%>
+        
+    
+    
+  </div>
+  <script src="./vendor/jqueryyy/jquery.min.js"></script>
+  <script src="./js/globall.js"></script>
+  <script src="./vendor/jqueryy/jquery.min.js"></script>
+  <script src="./vendor/select2/select2.min.js"></script>
+  <script src="./vendor/datepicker/moment.min.js"></script>
+  <script src="./vendor/datepicker/daterangepicker.js"></script>
+  <script src="./js/global.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="./vendor/jqueryyyy/jquery.min.js"></script>
+  <script src="./vendor/bootstrapp/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="./vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="./js/resumee.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    <title>Regístrate - MeetU</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./img/MeetULogo.png" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+    <link href="./vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="./vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="./https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <link href="./vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="./vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    <link href="./css/mainn.css" rel="stylesheet" media="all">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="./vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/landing-page.min.css" rel="stylesheet">
+    <script type="text/javascript" src="./js/valReg.js"></script>
+    
+    
+  <style>
+        .input-group {
+          position: relative;
+          margin: 0;
+        }
+        .input-file {
+          display: none;
+        }
+
+        .input-file + label {
+          font-size: 15px;
+          color: #fff;
+          color: white;
+          line-height: 40px;
+          background-color: darkred;
+          padding: 0 20px;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
+          display: inline-block;
+          margin-right: 15px;
+          -webkit-transition: all 0.4s ease;
+          -o-transition: all 0.4s ease;
+          -moz-transition: all 0.4s ease;
+          transition: all 0.4s ease;
+          cursor: pointer;
+        }
+
+        .input-file:focus + label,
+        .input-file + label:hover {
+          background: #1b1b1b;
+        }
+
+        .input-file__info {
+          font-size: 15px;
+          color: #666;
+        }
+
+        @media (max-width: 767px) {
+          .input-file__info {
+            display: block;
+            margin-top: 6px;
+          }
+        }
+  </style>
+</head>
+    <body onkeydown="return validaBody(event)">
+        <% include partials/header %>
+            <div class="wrapper wrapper--w960">
+                <div class="card card-2">
+                    <div class="card-body">
+                        <h2 class="title">Información De Registro</h2>
+                        <form method="POST" action="/Reg" enctype="multipart/form-data">
+                            <div class="input-group">
+                                <input class="input--style-2" type="text" placeholder="Nombre" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" name="name" id="nombre" onkeydown="return validaNombre(event)">
+                            </div>
+                            <div class="input-group">
+                                <input class="input--style-2" type="text" placeholder="Usuario" name="user" id="usuario" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" onkeydown="return validaUser(event)">
+                            </div>
+                            <div class="input-group">
+                                <input class="input--style-2" type="password" placeholder="Contraseña" name="pass" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" id="contraseña">
+                            </div>
+                            <div class="row row-space">
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <input class="input--style-2 js-datepicker" type="text" placeholder="Fecha De Nacimiento" name="birthday" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" readonly="readonly" id="birth">
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <div class="rs-select2 js-select-simple select--no-search">
+                                            <select name="Gender" id="género" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false">
+                                                <option disabled="disabled" selected="selected">Género</option>
+                                                <option>Hombre</option>
+                                                <option>Mujer</option>
+                                                <option>Otro</option>
+                                            </select>
+                                            <div class="select-dropdown"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-space">
+                            <div class="col-4">
+                            <div class="input-group">
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select name="Turno" id="turno" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false">
+                                        <option disabled="disabled" selected="selected">Turno</option>
+                                        <option>M</option>
+                                        <option>V</option>
+                                        <option>Otro</option>
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                            <div class="row row-space">
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <input class="input--style-2" type="text" placeholder="Boleta" name="boleta" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" id="boleta" onkeydown="return validaBoleta(event)">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="input-group">
+                                        <input class="input--style-2" type="text" placeholder="Grupo" name="grupo" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" id="grupo" onkeydown="return validaGrupo(event)">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                <select name="School" id="escuela" ondrop="return false" onchange="school()" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false">
+                                    <option disabled="disabled" selected="selected">Selecciona Tu Escuela</option>
+                                    <option>CET 1</option>
+                                    <option>CECYT 1</option>
+                                    <option>CECYT 2</option>
+                                    <option>CECYT 3</option>
+                                    <option>CECYT 4</option>
+                                    <option>CECYT 5</option>
+                                    <option>CECYT 6</option>
+                                    <option>CECYT 7</option>
+                                    <option>CECYT 8</option>
+                                    <option>CECYT 9</option>
+                                    <option>CECYT 10</option>
+                                    <option>CECYT 11</option>
+                                    <option>CECYT 12</option>
+                                    <option>CECYT 13</option>
+                                    <option>CECYT 14</option>
+                                    <option>CECYT 15</option>
+                                    <option>CECYT 16</option>
+                                    <option>CECYT 17</option>
+                                    <option>CECYT 18</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select name="Carrera" id="carrera" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false">
+                                        <option disabled="disabled" selected="selected">Primero debes seleccionar una escuela</option>
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>
+                        <br>
+                            <div class="row row-space">
+                            <div class="input-group">
+                                    <h4 class="title">Selecciona Tu Avatar: (Obligatorio)</h4>
+                                    <input type="hidden" name="fotop" id="fotop" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false"/>
+                                        <div class="input-group" onclick="document.getElementById('fotop').value=event.target.name; for(var i=1;i<6;i++){if(i==event.target.name){document.getElementById(i).style='cursor: pointer; width: 20%; height:100%;';}else{document.getElementById(i).style='cursor: pointer; width: 20%; height:100%; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);'}}">
+                                            <img src="./img/one.jpg" id="1" name="1" style="cursor: pointer; width: 20%; height:100%; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" class="img-fluid img-thumbnail rounded-circle float-left mx-auto">
+                                            <img src="./img/two.jpg" id="2" name="2" style="cursor: pointer; width: 20%; height:100%; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" class="img-fluid img-thumbnail rounded-circle float-left mx-auto">
+                                            <img src="./img/three.jpg" id="3" name="3" style="cursor: pointer; width: 20%; height:100%; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" class="img-fluid img-thumbnail rounded-circle float-left mx-auto">
+                                            <img src="./img/four.jpg" id="4" name="4" style="cursor: pointer; width: 20%; height:100%; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" class="img-fluid img-thumbnail rounded-circle float-left mx-auto">
+                                            <img src="./img/five.jpg" id="5" name="5" style="cursor: pointer; width: 20%; height:100%; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" class="img-fluid img-thumbnail rounded-circle float-left mx-auto">
+                                        </div>
+                            </div>
+                            </div>
+                            <br>
+                                <div class="row row-space">
+                                    <div class="col-6">
+                                        <div class="value">
+                                            <div class="input-group js-input-file">
+                                                <input type="file" class="input-file" type="file" name="archivo" id="file" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false">
+                                                <label class="label--file" for="file">Subir Foto De Perfil (Obligatorio)</label>
+                                                <span class="input-file__info">Sin Imagen</span>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="p-t-30">
+                                <button class="btn btn-block btn-lg btn-success" onclick="return validaboton()" type="submit">Registrarse</button>
+                                <br>
+                                <center><h6 class="title">Tu Avatar lo podrá ver cualquiera mientras que tu foto de perfil solo la podrán ver tus verdaderos amigos!</h6></center>
+                                <center><h6 class="title">TODOS LOS CAMPOS SON OBLIGATORIOS</h6></center>
+                                <center><h6 class="title">Al registrarte aceptas los términos y condiciones de la política de privacidad</h6></center>
+                                
+                                <%if(data!=""){%>
+                                <center><h2 class="title"><%=data%></h2></center>
+                                <%}%>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <script src="./vendor/jqueryyy/jquery.min.js"></script>
+            <script src="./js/globall.js"></script>
+            <script src="./vendor/jqueryy/jquery.min.js"></script>
+            <script src="./vendor/select2/select2.min.js"></script>
+            <script src="./vendor/datepicker/moment.min.js"></script>
+            <script src="./vendor/datepicker/daterangepicker.js"></script>
+            <script src="./js/global.js"></script>
+
+            <% include partials/footer %>
+
+    </body>
+</html>

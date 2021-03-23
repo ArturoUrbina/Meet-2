@@ -1,0 +1,1296 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<!DOCTYPE html><html class=''>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151120937-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-151120937-1');
+    </script>
+  <link rel="shortcut icon" type="image/x-icon" href="./img/MeetULogo.png" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+    
+      <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="../vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <title>Chat - <%=user%></title>
+  <!-- Custom styles for this template -->
+  <link href="../css/landing-page.min.css" rel="stylesheet"><link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/Chat.css">
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+<style class="cp-pen-styles">
+    body {
+      min-height: 100vh;
+      font-family: "proxima-nova", "Source Sans Pro", sans-serif;
+      font-size: 1em;
+      letter-spacing: 0.1px;
+      color: #32465a;
+      text-rendering: optimizeLegibility;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+      -webkit-font-smoothing: antialiased;
+    }
+    #frame {
+      width: 100%;
+      height: 80%;
+      background: #E6EAEA;
+    }
+    @media screen and (max-width: 360px) {
+      #frame {
+        width: 100%;
+        height: 100vh;
+      }
+    }
+    #frame #sidepanel {
+      float: left;
+      min-width: 280px;
+      max-width: 340px;
+      width: 40%;
+      height: 100%;
+      background: #2c3e50;
+      color: #f5f5f5;
+      overflow: hidden;
+      position: relative;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel {
+        width: 58px;
+        min-width: 58px;
+      }
+    }
+    #frame #sidepanel #profile {
+      width: 80%;
+      margin: 25px auto;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile {
+        width: 100%;
+        margin: 0 auto;
+        padding: 5px 0 0 0;
+        background: #32465a;
+      }
+    }
+    #frame #sidepanel #profile.expanded .wrap {
+      height: 210px;
+      line-height: initial;
+    }
+    #frame #sidepanel #profile.expanded .wrap p {
+      margin-top: 20px;
+    }
+    #frame #sidepanel #profile.expanded .wrap i.expand-button {
+      -moz-transform: scaleY(-1);
+      -o-transform: scaleY(-1);
+      -webkit-transform: scaleY(-1);
+      transform: scaleY(-1);
+      filter: FlipH;
+      -ms-filter: "FlipH";
+    }
+    #frame #sidepanel #profile .wrap {
+      height: 60px;
+      line-height: 60px;
+      overflow: hidden;
+      -moz-transition: 0.3s height ease;
+      -o-transition: 0.3s height ease;
+      -webkit-transition: 0.3s height ease;
+      transition: 0.3s height ease;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap {
+        height: 55px;
+      }
+    }
+    #frame #sidepanel #profile .wrap img {
+      width: 50px;
+      border-radius: 50%;
+      padding: 3px;
+      border: 2px solid #e74c3c;
+      height: auto;
+      float: left;
+      cursor: pointer;
+      -moz-transition: 0.3s border ease;
+      -o-transition: 0.3s border ease;
+      -webkit-transition: 0.3s border ease;
+      transition: 0.3s border ease;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap img {
+        width: 40px;
+        margin-left: 4px;
+      }
+    }
+    #frame #sidepanel #profile .wrap img.online {
+      border: 2px solid #2ecc71;
+    }
+    #frame #sidepanel #profile .wrap img.away {
+      border: 2px solid #f1c40f;
+    }
+    #frame #sidepanel #profile .wrap img.busy {
+      border: 2px solid #e74c3c;
+    }
+    #frame #sidepanel #profile .wrap img.offline {
+      border: 2px solid #95a5a6;
+    }
+    #frame #sidepanel #profile .wrap p {
+      float: left;
+      margin-left: 15px;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap p {
+        display: none;
+      }
+    }
+    #frame #sidepanel #profile .wrap i.expand-button {
+      float: right;
+      margin-top: 23px;
+      font-size: 0.8em;
+      cursor: pointer;
+      color: #435f7a;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap i.expand-button {
+        display: none;
+      }
+    }
+    #frame #sidepanel #profile .wrap #status-options {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+      width: 150px;
+      margin: 70px 0 0 0;
+      border-radius: 6px;
+      z-index: 99;
+      line-height: initial;
+      background: #435f7a;
+      -moz-transition: 0.3s all ease;
+      -o-transition: 0.3s all ease;
+      -webkit-transition: 0.3s all ease;
+      transition: 0.3s all ease;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap #status-options {
+        width: 58px;
+        margin-top: 57px;
+      }
+    }
+    #frame #sidepanel #profile .wrap #status-options.active {
+      opacity: 1;
+      visibility: visible;
+      margin: 75px 0 0 0;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap #status-options.active {
+        margin-top: 62px;
+      }
+    }
+    #frame #sidepanel #profile .wrap #status-options:before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 8px solid #435f7a;
+      margin: -8px 0 0 24px;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap #status-options:before {
+        margin-left: 23px;
+      }
+    }
+    #frame #sidepanel #profile .wrap #status-options ul {
+      overflow: hidden;
+      border-radius: 6px;
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li {
+      padding: 15px 0 30px 18px;
+      display: block;
+      cursor: pointer;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap #status-options ul li {
+        padding: 15px 0 35px 22px;
+      }
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li:hover {
+      background: #496886;
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 5px 0 0 0;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
+        width: 14px;
+        height: 14px;
+      }
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      margin: -3px 0 0 -3px;
+      background: transparent;
+      border-radius: 50%;
+      z-index: 0;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
+        height: 18px;
+        width: 18px;
+      }
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li p {
+      padding-left: 12px;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap #status-options ul li p {
+        display: none;
+      }
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li#status-online span.status-circle {
+      background: #2ecc71;
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li#status-online.active span.status-circle:before {
+      border: 1px solid #2ecc71;
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li#status-away span.status-circle {
+      background: #f1c40f;
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li#status-away.active span.status-circle:before {
+      border: 1px solid #f1c40f;
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li#status-busy span.status-circle {
+      background: #e74c3c;
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li#status-busy.active span.status-circle:before {
+      border: 1px solid #e74c3c;
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li#status-offline span.status-circle {
+      background: #95a5a6;
+    }
+    #frame #sidepanel #profile .wrap #status-options ul li#status-offline.active span.status-circle:before {
+      border: 1px solid #95a5a6;
+    }
+    #frame #sidepanel #profile .wrap #expanded {
+      padding: 100px 0 0 0;
+      display: block;
+      line-height: initial !important;
+    }
+    #frame #sidepanel #profile .wrap #expanded label {
+      float: left;
+      clear: both;
+      margin: 0 8px 5px 0;
+      padding: 5px 0;
+    }
+    #frame #sidepanel #profile .wrap #expanded input {
+      border: none;
+      margin-bottom: 6px;
+      background: #32465a;
+      border-radius: 3px;
+      color: #f5f5f5;
+      padding: 7px;
+      width: calc(100% - 43px);
+    }
+    #frame #sidepanel #profile .wrap #expanded input:focus {
+      outline: none;
+      background: #435f7a;
+    }
+    #frame #sidepanel #search {
+      margin-bottom: 5px;
+      border-top: 1px solid #32465a;
+      border-bottom: 1px solid #32465a;
+      font-weight: 300;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #search {
+        display: none;
+      }
+    }
+    #frame #sidepanel #search label {
+      position: absolute;
+      margin: 10px 0 0 20px;
+    }
+    #frame #sidepanel #search input {
+      font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
+      padding: 10px 0 10px 46px;
+      width: calc(100%);
+      border: none;
+      background: #32465a;
+      color: #f5f5f5;
+    }
+    #frame #sidepanel #search input:focus {
+      outline: none;
+      background: #435f7a;
+    }
+    #frame #sidepanel #search input::-webkit-input-placeholder {
+      color: #f5f5f5;
+    }
+    #frame #sidepanel #search input::-moz-placeholder {
+      color: #f5f5f5;
+    }
+    #frame #sidepanel #search input:-ms-input-placeholder {
+      color: #f5f5f5;
+    }
+    #frame #sidepanel #search input:-moz-placeholder {
+      color: #f5f5f5;
+    }
+    #frame #sidepanel #contacts {
+      height: calc(100% - 177px);
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #contacts {
+        height: calc(100% - 149px);
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+      #frame #sidepanel #contacts::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    #frame #sidepanel #contacts.expanded {
+      height: calc(100% - 334px);
+    }
+    #frame #sidepanel #contacts::-webkit-scrollbar {
+      width: 8px;
+      background: #2c3e50;
+    }
+    #frame #sidepanel #contacts::-webkit-scrollbar-thumb {
+      background-color: #243140;
+    }
+    #frame #sidepanel #contacts ul li.contact {
+      position: relative;
+      padding: 10px 0 15px 0;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #contacts ul li.contact {
+        padding: 6px 0 46px 8px;
+      }
+    }
+    #frame #sidepanel #contacts ul li.contact:hover {
+      background: #32465a;
+    }
+    #frame #sidepanel #contacts ul li.contact.active {
+      background: #32465a;
+      border-right: 5px solid #435f7a;
+    }
+    #frame #sidepanel #contacts ul li.contact.active span.contact-status {
+      border: 2px solid #32465a !important;
+    }
+    #frame #sidepanel #contacts ul li.contact .wrap {
+      width: 88%;
+      margin: 0 auto;
+      position: relative;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #contacts ul li.contact .wrap {
+        width: 100%;
+      }
+    }
+    #frame #sidepanel #contacts ul li.contact .wrap span {
+      position: absolute;
+      left: 0;
+      margin: -2px 0 0 -2px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid #2c3e50;
+      background: #95a5a6;
+    }
+    #frame #sidepanel #contacts ul li.contact .wrap span.online {
+      background: #2ecc71;
+    }
+    #frame #sidepanel #contacts ul li.contact .wrap span.away {
+      background: #f1c40f;
+    }
+    #frame #sidepanel #contacts ul li.contact .wrap span.busy {
+      background: #e74c3c;
+    }
+    #frame #sidepanel #contacts ul li.contact .wrap img {
+      width: 40px;
+      border-radius: 50%;
+      float: left;
+      margin-right: 10px;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #contacts ul li.contact .wrap img {
+        margin-right: 0px;
+      }
+    }
+    #frame #sidepanel #contacts ul li.contact .wrap .meta {
+      padding: 5px 0 0 0;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #contacts ul li.contact .wrap .meta {
+        display: none;
+      }
+    }
+    #frame #sidepanel #contacts ul li.contact .wrap .meta .name {
+      font-weight: 600;
+    }
+    #frame #sidepanel #contacts ul li.contact .wrap .meta .preview {
+      margin: 5px 0 0 0;
+      padding: 0 0 1px;
+      font-weight: 400;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -moz-transition: 1s all ease;
+      -o-transition: 1s all ease;
+      -webkit-transition: 1s all ease;
+      transition: 1s all ease;
+    }
+    #frame #sidepanel #contacts ul li.contact .wrap .meta .preview span {
+      position: initial;
+      border-radius: initial;
+      background: none;
+      border: none;
+      padding: 0 2px 0 0;
+      margin: 0 0 0 1px;
+      opacity: .5;
+    }
+    #frame #sidepanel #bottom-bar {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+    #frame #sidepanel #bottom-bar button {
+      float: left;
+      border: none;
+      width: 50%;
+      padding: 10px 0;
+      background: #32465a;
+      color: #f5f5f5;
+      cursor: pointer;
+      font-size: 0.85em;
+      font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #bottom-bar button {
+        float: none;
+        width: 100%;
+        padding: 15px 0;
+      }
+    }
+    #frame #sidepanel #bottom-bar button:focus {
+      outline: none;
+    }
+    #frame #sidepanel #bottom-bar button:nth-child(1) {
+      border-right: 1px solid #2c3e50;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #bottom-bar button:nth-child(1) {
+        border-right: none;
+        border-bottom: 1px solid #2c3e50;
+      }
+    }
+    #frame #sidepanel #bottom-bar button:hover {
+      background: #435f7a;
+    }
+    #frame #sidepanel #bottom-bar button i {
+      margin-right: 3px;
+      font-size: 1em;
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #bottom-bar button i {
+        font-size: 1.3em;
+      }
+    }
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #bottom-bar button span {
+        display: none;
+      }
+    }
+    #frame .content {
+      float: right;
+      width: 60%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    @media screen and (max-width: 735px) {
+      #frame .content {
+        width: calc(100% - 58px);
+        min-width: 300px !important;
+      }
+    }
+    @media screen and (min-width: 900px) {
+      #frame .content {
+        width: calc(100% - 340px);
+      }
+    }
+    #frame .content .contact-profile {
+      width: 100%;
+      display: inline-block;
+      line-height: 60px;
+      background: #f5f5f5;
+    }
+    #frame .content .contact-profile img {
+      width: 60px;
+      height: auto;
+      border-radius: 50%;
+      float: left;
+      margin: 9px 12px 9px 9px;
+    }
+    #frame .content .contact-profile p {
+      float: left;
+    }
+    #frame .content .contact-profile .social-media {
+      float: right;
+    }
+    #frame .content .contact-profile .social-media i {
+      margin-left: 14px;
+      cursor: pointer;
+    }
+    #frame .content .contact-profile .social-media i:nth-last-child(1) {
+      margin-right: 20px;
+    }
+    #frame .content .contact-profile .social-media i:hover {
+      color: #435f7a;
+    }
+    #frame .content .messages {
+      height: 83%;
+      min-height: calc(83%);
+      max-height: calc(83%);
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+    @media screen and (max-width: 735px) {
+      #frame .content .messages {
+        max-height: calc(100% - 105px);
+      }
+    }
+    #frame .content .messages::-webkit-scrollbar {
+      width: 8px;
+      background: transparent;
+    }
+    #frame .content .messages::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+    #frame .content .messages div li {
+      display: inline-block;
+      clear: both;
+      margin: 15px 15px 5px 15px;
+      width: calc(100% - 25px);
+      font-size: 1.2em;
+    }
+    #frame .content .messages div li:nth-last-child(1) {
+      margin-bottom: 20px;
+    }
+    #frame .content .messages div li.sent img {
+      margin: 6px 8px 0 0;
+    }
+    #frame .content .messages div li.sent p {
+      background: #435f7a;
+      color: #f5f5f5;
+    }
+    #frame .content .messages div li.replies img.prof {
+      float: right;
+      margin: 6px 0 0 8px;
+    }
+    #frame .content .messages div li.replies p {
+      background: #f5f5f5;
+      float: right;
+    }
+    #frame .content .messages div li img.prof {
+      width: 50px;
+      border-radius: 50%;
+      float: left;
+    }
+    #frame .content .messages div li p {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 20px;
+      max-width: 205px;
+      line-height: 130%;
+    }
+    @media screen and (min-width: 735px) {
+      #frame .content .messages div li p {
+        max-width: 300px;
+      }
+    }
+    #frame .message-input {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      z-index: 99;
+    }
+    #frame .message-input .wrap {
+      position: relative;
+    }
+    #frame .message-input .wrap input {
+      font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
+      float: left;
+      border: none;
+      width: calc(80%);
+      height: 7%;
+      padding: 11px 32px 10px 8px;
+      font-size: 0.8em;
+      color: #32465a;
+    }
+    @media screen and (max-width: 735px) {
+      #frame .message-input .wrap input {
+        padding: 15px 32px 16px 8px;
+      }
+    }
+    #frame  .message-input .wrap input:focus {
+      outline: none;
+    }
+    #frame .message-input .wrap .attachment {
+      position: absolute;
+      right: 60px;
+      z-index: 4;
+      margin-top: 10px;
+      font-size: 1.1em;
+      color: #435f7a;
+      opacity: .5;
+      cursor: pointer;
+    }
+    @media screen and (max-width: 735px) {
+      #frame .message-input .wrap .attachment {
+        margin-top: 17px;
+        right: 65px;
+      }
+    }
+    #frame .message-input .wrap .attachment:hover {
+      opacity: 1;
+    }
+    #frame .message-input .wrap button {
+      border: none;
+      width: 100%;
+      cursor: pointer;
+      background: #32465a;
+      color: #f5f5f5;
+      height: 3rem;
+    }
+    @media screen and (max-width: 735px) {
+      #frame .message-input .wrap button {
+        padding: 0px 0;
+      }
+    }
+    #frame .message-input .wrap button:hover {
+      background: #435f7a;
+    }
+    #frame .message-input .wrap button:focus {
+      outline: none;
+    }
+
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 1000;
+}
+
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+.form-container .cancel {
+  background-color: red;
+}
+
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+  input[type=”file”] {
+    display: none;
+  }
+  label[for="chat_IMG"]{
+    width: 20%;
+    height: 3rem;
+    color: #fff;
+    background-color: #f5af09;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 20px; 
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    z-index: 0;
+  }
+  .middleR {
+    border-radius: 2rem;
+    float: right;
+  }
+  .middleS {
+    border-radius: 2rem;
+    float: left;
+  }
+  .card{
+    cursor: pointer;
+    width: 20rem;
+    height: 20rem;
+    align-content: center;
+    transition: transform .6s linear;
+  }
+  .front, .back{
+    top: 5%;
+    left: 5%;
+    transform: translate(-5%,-5%);
+    align-content: center;
+    width: 90%;
+    height: 90%;
+    overflow: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    transition: transform .6s linear;
+    border-radius: 5%;
+  }
+  .image{
+    height: 100%;
+    width: 100%;
+  }
+  .front{
+    transform: perspective(600px) rotateY(0deg);
+  }
+  .back{
+    background: #f1f1f1;
+    transform: perspective(600px) rotateY(180deg);
+    border-radius: 20%;
+  }
+  .back-content{
+    padding-top: 10%;
+    padding-bottom: 10%;
+    color: #2c3e50;
+    text-align: center;
+    width: 100%;
+  }
+  .sm{
+    margin: 20px 0;
+  }
+  .sm a{
+    display: inline-flex;
+    width: 15%;
+    height: 15%;
+    justify-content: center;
+    align-items: center;
+    color: #2c3e50;
+    font-size: 18px;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  .sm a:hover{
+    background: goldenrod;
+    color: white;
+  }
+  .card:hover > .front{
+    transform: perspective(600px) rotateY(-180deg);
+  }
+  .card:hover {
+    background-color: darkred;
+  }
+  .card:hover > .back{
+    transform: perspective(600px) rotateY(0deg);
+  }
+</style></head><body onkeydown="return validaBody(event)" onload="return chatScroll()">
+  <div class="form-popup" id="ISA">
+    <div class="form-container">
+      <h1>Hola!</h1>
+      <div class="row" style="padding-bottom: 1rem; padding-top: 1rem;">
+        <div class="col-7">
+          Me llamo ISA, y soy la IA experimental de MeetU, mi algoritmo me permite analizar tu conversación y saber si será del agrado de 
+            <%if(!chat.ref_am){%>
+            <%=chat.use_us%>
+            <%}else{%>
+            <%=chat.nom_us%>
+            <%}%>
+        </div>
+        <div class="col-5">
+          <img src="./img/MeetULogo.png" style="display: block;
+          margin-bottom: 1rem;
+          margin-top: 1rem;
+          margin-left: auto;
+          margin-right: auto;
+          width: 5rem; height: 5rem;" alt="" />
+        </div>
+      </div>
+      <label for="email"><center><b id="predict" style="margin-left: auto; margin-right: auto;"></b></center></label>
+      <input type="text" placeholder="" id="messageSent" readonly style="text-align: center;">
+      <button class="btn" onclick="sendDef()">Envíar Definitivamente</button>
+      <button class="btn cancel" onclick="Nope()">Pensaré mejor mi mensaje</button>
+    </div>
+  </div>
+<% include partials/header %>
+<div id="frame">
+	<div id="sidepanel">
+		<div id="profile">
+			<div class="wrap">
+				<img id="profile-img" src="<%=data.fot_us%>" style="width: 3rem; height: 3rem; cursor: pointer;" class="online" alt="" onclick="window.location='/Amigo'"/>
+				<p><%=data.nom_us%></p>
+				<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+				<div id="expanded">
+					<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true" style="cursor: pointer;" onclick="window.location='https://web.facebook.com/EYE2019/'"></i></label>
+					<input name="twitter" type="text" value="EYE2019" readonly="readonly" style="cursor: pointer;" onclick="window.location='https://web.facebook.com/EYE2019/'"/>
+					<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true" style="cursor: pointer;" onclick="window.location='https://twitter.com/EYE_MeetU'"></i></label>
+					<input name="twitter" type="text" value="EYE_MeetU" readonly="readonly" style="cursor: pointer;" onclick="window.location='https://web.facebook.com/EYE2019/'"/>
+					<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true" style="cursor: pointer;" onclick="window.location='https://www.instagram.com/eye_meet_u/?hl=es-la'"></i></label>
+					<input name="twitter" type="text" value="eye_meet_u" readonly="readonly" style="cursor: pointer;" onclick="window.location='https://web.facebook.com/EYE2019/'"/>
+				</div>
+			</div>
+		</div>
+		<div id="contacts">
+			<ul>
+        <%for(var i = 0 ; i < amigos.length; i++){
+          if(amigos[i].isf_am&&!amigos[i].rec_am){
+            if(!amigos[i].ref_am&&!amigos[i].blocked){%>
+				<li class="contact active">
+					<div class="wrap" style="cursor: pointer;" onclick="window.location='/chatAmigo/<%=amigos[i].id_us%>'">
+						<span class="contact-status busy"></span>
+						<img src="<%=amigos[i].ftp_us%>" style="width: 3rem; height: 3rem;" alt="" />
+						<div class="meta">
+							<p class="name"><%=amigos[i].use_us%></p>
+              <p class="preview"><%=amigos[i].nom_gus%></p>
+              <input type="text" hidden="hidden" value="<%=i%>"></input>
+						</div>
+					</div>
+        </li>
+        <%}else if(amigos[i].ref_am&&!amigos[i].blocked){%>
+          <li class="contact active">
+              <div class="wrap" style="cursor: pointer;" onclick="window.location='/chatAmigo/<%=amigos[i].id_us%>'">
+                <span class="contact-status busy"></span>
+                <img src="<%=amigos[i].fot_us%>" style="width: 3rem; height: 3rem;" alt="" />
+                <div class="meta">
+                  <p class="name"><%=amigos[i].nom_us%></p>
+                  <p class="preview"><%=amigos[i].nom_gus%></p>
+                  <input type="text" hidden="hidden" value="<%=i%>"></input>
+                </div>
+              </div>
+            </li>
+            <%}else if(amigos[i].ref_am&&amigos[i].blocked){%>
+              <li class="contact active">
+                  <div class="wrap" style="cursor: pointer;" onclick="window.location='/chatAmigo/<%=amigos[i].id_us%>'">
+                    <span class="contact-status busy"></span>
+                    <img src="<%=amigos[i].fot_us%>" style="width: 3rem; height: 3rem;  -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" alt="" />
+                    <div class="meta">
+                      <p class="name"><%=amigos[i].nom_us%> (Bloqueado)</p>
+                      <p class="preview">Solo puedes ver chat anterior</p>
+                      <input type="text" hidden="hidden" value="<%=i%>"></input>
+                    </div>
+                  </div>
+                </li>
+                <%}else if(!amigos[i].ref_am&&amigos[i].blocked){%>
+                  <li class="contact active">
+                      <div class="wrap" style="cursor: pointer;" onclick="window.location='/chatAmigo/<%=amigos[i].id_us%>'">
+                        <span class="contact-status busy"></span>
+                        <img src="<%=amigos[i].ftp_us%>" style="width: 3rem; height: 3rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" alt="" />
+                        <div class="meta">
+                          <p class="name"><%=amigos[i].use_us%> (Bloqueado)</p>
+                          <p class="preview">Solo puedes ver chat anterior</p>
+                          <input type="text" hidden="hidden" value="<%=i%>"></input>
+                        </div>
+                      </div>
+                    </li>
+        <%}
+        }
+        }%>
+      </ul>
+      <br>
+      <br>
+      <ul>
+        <li class="contact">
+          <div class="wrap">
+            <div class="meta">
+              <p class="name">Gustos en común:</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <br>
+      <ul>
+        <%if(chat.ref_am&&!chat.blocked){%>
+          <li class="contact">
+              <div class="wrap">
+                <img src="<%=chat.fot_us%>" style="width: 3rem; height: 3rem;" alt="" />
+                <div class="meta">
+                  <p class="name"><%=chat.nom_us%></p>
+                  <p class="preview"><%=chat.nom_gus%></p>
+                  <input type="text" hidden="hidden" value="<%=i%>"></input>
+                </div>
+              </div>
+            </li>
+            <%}else if(!chat.ref_am&&!chat.blocked){%>
+              <li class="contact">
+                  <div class="wrap">
+                    <img src="<%=chat.ftp_us%>" style="width: 3rem; height: 3rem;" alt="" />
+                    <div class="meta">
+                      <p class="name"><%=chat.use_us%></p>
+                      <p class="preview"><%=chat.nom_gus%></p>
+                      <input type="text" hidden="hidden" value="<%=i%>"></input>
+                    </div>
+                  </div>
+                </li>
+                <%}else if(chat.ref_am&&chat.blocked){%>
+                  <li class="contact">
+                      <div class="wrap">
+                        <img src="<%=chat.fot_us%>" style="width: 3rem; height: 3rem;  -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" alt="" />
+                        <div class="meta">
+                          <p class="name"><%=chat.nom_us%> (Bloqueado)</p>
+                          <p class="preview">Solo puedes ver sus mensajes</p>
+                          <input type="text" hidden="hidden" value="<%=i%>"></input>
+                        </div>
+                      </div>
+                    </li>
+                    <%}else if(!chat.ref_am&&chat.blocked){%>
+                      <li class="contact">
+                          <div class="wrap">
+                            <img src="<%=chat.ftp_us%>" style="width: 3rem; height: 3rem;  -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" alt="" />
+                            <div class="meta">
+                              <p class="name"><%=chat.use_us%> (Bloqueado)</p>
+                              <p class="preview">Solo puedes ver sus mensajes</p>
+                              <input type="text" hidden="hidden" value="<%=i%>"></input>
+                            </div>
+                          </div>
+                        </li>
+            <%}if(!chat.blocked){
+              if(chat.nom_mus == data.nom_mus){%>
+            <li class="contact">
+                <div class="wrap">
+                  <div class="meta">
+                    <p class="name">Música: <%=chat.nom_mus%></p>
+                  </div>
+                </div>
+              </li>
+            <%}%>
+            <%if(chat.nom_dep == data.nom_dep){%>
+              <li class="contact">
+                  <div class="wrap">
+                    <div class="meta">
+                      <p class="name">Deportes: <%=chat.nom_dep%></p>
+                    </div>
+                  </div>
+                </li>
+              <%}%>
+              <%if(chat.nom_vid == data.nom_vid){%>
+                <li class="contact">
+                    <div class="wrap">
+                      <div class="meta">
+                        <p class="name">VideoJuegos: <%=chat.nom_vid%></p>
+                      </div>
+                    </div>
+                  </li>
+                <%}%>
+                <%if(chat.nom_lec == data.nom_lec){%>
+                  <li class="contact">
+                      <div class="wrap">
+                        <div class="meta">
+                          <p class="name">Lectura: <%=chat.nom_lec%></p>
+                        </div>
+                      </div>
+                    </li>
+                  <%}%>
+                  <%if(chat.nom_pel == data.nom_pel){%>
+                    <li class="contact">
+                        <div class="wrap">
+                          <div class="meta">
+                            <p class="name">Películas: <%=chat.nom_pel%></p>
+                          </div>
+                        </div>
+                      </li>
+                    <%}
+                  }else{%>
+                    <li class="contact">
+                        <div class="wrap">
+                          <div class="meta">
+                            <p class="name">El contacto ha sido bloqueado, ya no puedes ver sus gustos</p>
+                          </div>
+                        </div>
+                      </li>
+                    <%}%>
+      </ul>
+      <%if(!chat.blocked){
+      if(chat.ref_am){%>
+        <br>
+        <ul>
+          <li class="contact">
+            <div class="wrap">
+              <div class="meta">
+                <p class="name">Información Confidencial: </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul>
+            <li class="contact">
+                <div class="wrap">
+                  <div class="meta">
+                    <p class="name">Género: <%=chat.nom_gen%></p>
+                  </div>
+                </div>
+              </li>
+              <%if(chat.nom_tur=="V"){%>
+              <li class="contact">
+                  <div class="wrap">
+                    <div class="meta">
+                      <p class="name">Turno: Vespertino</p>
+                    </div>
+                  </div>
+                </li>
+                <%}else if(chat.nom_tur=="M"){%>
+                <li class="contact">
+                    <div class="wrap">
+                      <div class="meta">
+                        <p class="name">Turno: Matutino</p>
+                      </div>
+                    </div>
+                  </li>
+                  <%}else{%>
+                    <li class="contact">
+                        <div class="wrap">
+                          <div class="meta">
+                            <p class="name">Turno: <%=chat.nom_tur%></p>
+                          </div>
+                        </div>
+                      </li>
+                  <%}%>
+                  <li class="contact">
+                      <div class="wrap">
+                        <div class="meta">
+                          <p class="name">Carrera: <%=chat.nom_car%></p>
+                        </div>
+                      </div>
+                    </li>
+                  <li class="contact">
+                      <div class="wrap">
+                        <div class="meta">
+                          <p class="name">Fecha De Nacimiento: <%=chat.eda_us%></p>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="contact">
+                        <div class="wrap">
+                          <div class="meta">
+                            <p class="name">Grupo: <%=chat.gru_us%></p>
+                          </div>
+                        </div>
+                      </li>
+        </ul>
+      <%}
+      }%>
+		</div>
+		<div id="bottom-bar">
+      <%if(!chat.blocked){%>
+			<button id="addcontact" onclick="window.location='/Amigo'"><i class="fa fa-user fa-fw" aria-hidden="true"></i> <span>Volver al menú</span></button>
+			<button id="settings" onclick="window.location='/RP/<%=chat.id_us%>'"><i class="fa fa-ban fa-fw" aria-hidden="true"></i> <span>Bloquear</span></button>
+      <%}else{%>
+        <button id="addcontact" onclick="window.location='/Amigo'"><i class="fa fa-user fa-fw" aria-hidden="true"></i> <span>Volver al menú</span></button>
+			  <button id="settings"><i class="fa fa-ban fa-fw" aria-hidden="true"></i> <span>Ya ha sido bloqueado</span></button>
+      <%}%>
+    </div>
+	</div>
+	<div class="content" id="chat">
+		<div class="contact-profile" id="fr">
+      <%if(!chat.ref_am&&!chat.blocked){%>
+			<img src="<%=chat.ftp_us%>" style="width: 5rem; height: 5rem;" alt=""/>
+      <p><%=chat.use_us%></p><br>
+      <p>Última conexión: <%=chat.log%></p>
+      <%}else if(chat.ref_am&&!chat.blocked){%>
+        <img src="<%=chat.fot_us%>" style="width: 5rem; height: 5rem;" alt=""/>
+        <p><%=chat.nom_us%></p><br>
+        <p>Última conexión: <%=chat.log%></p>
+      <%}else if(chat.ref_am&&chat.blocked){%>
+        <img src="<%=chat.fot_us%>" style="width: 5rem; height: 5rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" alt=""/>
+        <p><%=chat.nom_us%> (Bloqueado)</p><br>
+        <p>Última conexión: <%=chat.log%></p>
+      <%}else if(!chat.ref_am&&chat.blocked){%>
+        <img src="<%=chat.ftp_us%>" style="width: 5rem; height: 5rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" alt=""/>
+        <p><%=chat.use_us%> (Bloqueado)</p><br>
+        <p>Última conexión: <%=chat.log%></p>
+      <%}%>
+		</div>
+		<div class="messages" id="chatContainer">
+			<div id="msg">
+          <%for(var i = 0 ; i < msg.length ; i++){
+            if(msg[i].sdr_ms&&msg[i].id_us==data.id_us){
+              if(!chat.ref_am&&!chat.blocked){%>
+				  <li class="sent">
+					  <img src="<%=data.ftp_us%>" class="prof" style="width: 5rem; height: 5rem;" alt="" />
+					  <p><%=msg[i].msg_ms%></p>
+				  </li>
+        <%}else if(chat.ref_am&&!chat.blocked){%>
+          <li class="sent">
+              <img src="<%=data.fot_us%>" class="prof" style="width: 5rem; height: 5rem;" alt="" />
+              <p><%=msg[i].msg_ms%></p>
+            </li>
+            <%}else if(chat.ref_am&&chat.blocked){%>
+              <li class="sent">
+                  <img src="<%=data.fot_us%>" class="prof" style="width: 5rem; height: 5rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" alt="" />
+                  <p><%=msg[i].msg_ms%></p>
+                </li>
+                <%}else if(!chat.ref_am&&chat.blocked){%>
+                  <li class="sent">
+                      <img src="<%=data.ftp_us%>" class="prof" style="width: 5rem; height: 5rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" alt="" />
+                      <p><%=msg[i].msg_ms%></p>
+                    </li>
+        <%}
+        }else if(msg[i].id_us==data.id_us){
+          if(!chat.ref_am&&!chat.blocked){%>
+            <li class="replies">
+              <img src="<%=chat.ftp_us%>" style="width: 5rem; height: 5rem;" class="prof" alt="" />
+              <p><%=msg[i].msg_ms%></p>
+            </li>
+          <%}else if(chat.ref_am&&!chat.blocked){%>
+            <li class="replies">
+                <img src="<%=chat.fot_us%>" style="width: 5rem; height: 5rem;" class="prof" alt="" />
+                <p><%=msg[i].msg_ms%></p>
+              </li>
+              <%}else if(chat.ref_am&&chat.blocked){%>
+                <li class="replies">
+                    <img src="<%=chat.fot_us%>" style="width: 5rem; height: 5rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" class="prof" alt="" />
+                    <p><%=msg[i].msg_ms%></p>
+                  </li>
+                  <%}else if(!chat.ref_am&&chat.blocked){%>
+                    <li class="replies">
+                        <img src="<%=chat.ftp_us%>" style="width: 5rem; height: 5rem; -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); -ms-filter: grayscale(100%); -o-filter: grayscale(100%); filter: grayscale(100%);" class="prof" alt="" />
+                        <p><%=msg[i].msg_ms%></p>
+                      </li>
+          <%}
+        }
+        }%>
+      </div>
+      
+    </div>
+    <div id="typing">
+        
+    </div>
+    
+    </div>
+    
+    <div class="message-input">
+      <%if(!chat.blocked){%>
+        <div class="wrap">
+        <%if(!chat.ref_am){%>
+        <input type="text" hidden="hidden" id="fotoa" value="<%=chat.ftp_us%>"/>
+        <input id="foto" type="text" hidden="hidden" value="<%=data.ftp_us%>" />
+        <input type="text" hidden="hidden" id="friend" value="<%=chat.use_us%>"/>
+        <%}else{%>
+        <input type="text" hidden="hidden" id="fotoa" value="<%=chat.fot_us%>"/>
+        <input id="foto" type="text" hidden="hidden" value="<%=data.fot_us%>" />
+        <input type="text" hidden="hidden" id="friend" value="<%=chat.nom_us%>"/>
+        <%}%>
+        <input id="idusa" type="text" hidden="hidden" value="<%=chat.id_us%>" />
+        <input id="idus" type="text" hidden="hidden" value="<%=data.id_us%>" />
+        <input id="username" type="text" hidden="hidden" value="<%=user%>" />
+        <input id="nombreee" type="text" hidden="hidden" value="<%=data.nom_us%>" />
+        <input id="message" class="msg" type="text" placeholder="<%=user%>, Recuerda ser respetuos@ en el chat, intenta abrir conversación con un gusto en común pero no compartas información privada hasta que estés seguro ;)" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" onkeydown="return validaChat(event)"style="text-align: center;" />
+        
+        <input type="file" class="chat_IMG" id="chat_IMG" style="display: none;">
+        <label for="chat_IMG" style="cursor: pointer;"><i class="fa fa-camera-retro fa-1x" style="padding: 1rem;"></i>Enviar Imagen</label>
+        <button id="send" class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </div>
+        <%}%>
+  </div>
+  
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="../js/chat.js"></script>
+<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script >$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
+$("#profile-img").click(function() {
+	$("#status-options").toggleClass("active");
+});
+
+$(".expand-button").click(function() {
+  $("#profile").toggleClass("expanded");
+	$("#contacts").toggleClass("expanded");
+});
+
+$("#status-options ul li").click(function() {
+	$("#profile-img").removeClass();
+	$("#status-online").removeClass("active");
+	$("#status-away").removeClass("active");
+	$("#status-busy").removeClass("active");
+	$("#status-offline").removeClass("active");
+	$(this).addClass("active");
+	
+	if($("#status-online").hasClass("active")) {
+		$("#profile-img").addClass("online");
+	} else if ($("#status-away").hasClass("active")) {
+		$("#profile-img").addClass("away");
+	} else if ($("#status-busy").hasClass("active")) {
+		$("#profile-img").addClass("busy");
+	} else if ($("#status-offline").hasClass("active")) {
+		$("#profile-img").addClass("offline");
+	} else {
+		$("#profile-img").removeClass();
+	};
+	
+	$("#status-options").removeClass("active");
+});
+$(window).on('keydown', function(e) {
+  if (e.which == 13) {
+    newMessage();
+    return false;
+  }
+});
+//# sourceURL=pen.js
+</script>
+</body></html>

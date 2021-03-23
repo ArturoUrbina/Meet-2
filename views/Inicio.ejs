@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="shortcut icon" type="image/x-icon" href="./img/MeetULogo.png" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+	<title>Inicia Sesión - MeetU</title>
+	<link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href="./vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+	<link href="./css/landing-page.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="./vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="./vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="./vendor/select2/select2.min.css">	
+	<link rel="stylesheet" type="text/css" href="./vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="./css/util.css">
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+	<script type="text/javascript" src="./js/valInicio.js"></script>
+</head>
+    <body onkeydown="return validaBody(event)">
+        <% include partials/header %>
+        <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-form-title" style="background-image: url(./img/bg-01.jpg);">
+					<span class="login100-form-title-1">
+						Iniciar Sesión
+					</span>
+				</div>
+
+                            <form method="post" action="/save" class="login100-form validate-form">
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Se requiere el usuario o correo para continuar">
+						<span class="label-input100">Usuario</span>
+						<input class="input100" type="text" name="user" placeholder="Nombre de usuario" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" id="usuario" onkeydown="return validaUser(event)" onkeypress="">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-18" data-validate = "Se requiere la contraseña para continuar">
+						<span class="label-input100">Contraseña</span>
+						<input class="input100" type="password" name="pass" placeholder="Ingresa tu contraseña" ondrop="return false" ondrag="return false" ondragend="return false" ondragenter="return false" ondragover="return false" ondragstart="return false" onpaste="return false" id="contraseña" onkeydown="return validaPass(event)">
+						<span class="focus-input100"></span>
+					</div>
+					<div class="container-login100-form-btn">
+                        <button class="login100-form-btn" onclick="return validaboton()" type="submit">
+							Iniciar sesión
+						</button>
+					</div>
+					<%if(data!=null){
+					if(data.includes("Haz sido bloqueado definitivamente del sistema")){%>
+							<center><h4 class="title"><%=data%></h4></center>
+							<a class="btn btn-block btn-lg btn-warning" href="/Revizao" role="button">Solicitar Revisión</a>
+					<%}else if(data.includes("Ya haz solicitado revisión anteriormente y se ha determinado una suspensión permanente de tu cuenta")||data.includes("Se te advirtió que reportar sin fundamento llevaría a una sanción permanente de tu cuenta")){%>
+						<center><h4 class="title"><%=data%></h4></center>
+							<a class="btn btn-block btn-lg btn-danger">No puedes solicitar revisión, adiós</a>
+					<%}else{%>
+						<center><h4 class="title"><%=data%></h4></center>
+					<%}}%>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+    <% include partials/footer %>
+    <script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="./vendor/animsition/js/animsition.min.js"></script>
+	<script src="./vendor/bootstrap/js/popper.js"></script>
+	<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="./vendor/select2/select2.min.js"></script>
+	<script src="./vendor/daterangepicker/moment.min.js"></script>
+	<script src="./vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="./vendor/countdowntime/countdowntime.js"></script>
+	<script src="./js/main.js"></script>
+    </body>
+    
+</html>
+            
+            
+            
